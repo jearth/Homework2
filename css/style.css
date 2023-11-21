@@ -1,0 +1,34 @@
+/* 내비게이션 바 */
+.nav {
+    margin-top: 20px;
+    margin-right: 10px;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    }
+
+    .nav-link {
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 102px;
+    color: white;
+    background-color: navy;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+
+
+/* 사이드바 */
+.nav-link strong {
+    font-size: 13px;
+    font-weight: bold; 
+}
+
+.sb-sidenav {
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sb-sidenav-menu .nav-link {
+    padding: 10px 20px;
+}

@@ -80,7 +80,6 @@
     flex: 1;
     padding: 10px;
     background-color: #FBFBFB;
-    
 }
 
 #content h4 {
@@ -98,19 +97,76 @@
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
     border-radius: 0.5em;
+    display: flex;
+    align-items: center;
+    color: #212529;
 }
 
-.search-box {
+#container1 .search-box {
     display: flex;
-    flex-direction: row;
     align-items: center;
 }
 
-.search-item {
-    margin-right: 10px; 
+#container1 h4{
+    color: #212529;
 }
 
-.search-button {
+#container1 h7{
+    margin-left: 44px;
+    margin-right: 38px;
+    font-weight: bold;
+    color: #212529;
+}
+
+#container1 select[name="option"]{
+    width: 180px;
+    height: 36px;
+    margin-right: 12px;
+    border-radius: 0.5em;
+    border: 2px solid #EEEEEE;
+    font-weight: bold;
+    font-size: 13px;
+    color: #212529;
+    padding: 5px 10px;
+    cursor: pointer;
+
+}
+
+/* #container1 select[name="option"]:after{
+    content: '';
+    display: block; 
+    width: 2px;
+    height: 100%; 
+    position: absolute; 
+    top: 0; 
+    right: 35px;
+    background: #ffffff;
+} */
+
+#container1 .search-box .input-box input{
+    width: 220px;
+    height: 36px;
+    margin-right: 20px;
+    border-radius: 0.5em;
+    border: 2px solid #EEEEEE;
+    font-size: 13px;
+    padding: 5px 10px;
+}
+
+#container1 .input-box input::placeholder {
+    color: #969696;
+}
+
+#container1 .button-box .search-button {
+    width: 88px;
+    height: 36px;
+    color: #0F2D6A;
+    font-size: 13px;
+    font-weight: bold;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+    text-align: center;
+    padding-top: 6px;
     cursor: pointer;
 }
 
@@ -123,10 +179,53 @@
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
     border-radius: 0.5em;
+    display: flex;
+    align-items: top;
 }
 
+#container2 h5{
+    margin-top: 35px;
+    margin-left: 44px;
+    font-weight: bold;
+    color: #212529;
+}
+
+#container2 .button-box {
+    gap: 12px;
+    margin-top: 19px;
+}
+
+#container2 .button {
+    padding: 8px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5em;
+}
+
+#container2 .button.register {
+    margin-left: 800px;
+    width: 130px;
+    height: 36px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #0F2D6A;
+    color: white;
+}
+
+#container2 .button.delete {
+    width: 92px;
+    height: 36px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color: #FFE0DF;
+    color: #DD4B39;
+}
+
+/* 꼬리말 */
 #footer {
-    background-color: #ffffff;
+    background-color: #FBFBFB;
     color: #969696;
     padding: 10px;
     width: 86%;

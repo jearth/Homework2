@@ -31,9 +31,153 @@
             <div id="content">
                 <h4 class="title-heading">지도자 등록하기</h4>
                 <div class="container" id="container1">
-                    <h4 class="section-heading">1. 일반 현황(2023년 01월 01일 기준)<span class="required-field">* 필수입력값 항목입니다.</span><hr class="section-hr"></h4>
-                    <h7>식별코드</h7>
-                </div>   
+                    <div class="d-flex flex-column align-items-center">
+                    <h4 class="section-heading1">1. 일반 현황(2023년 01월 01일 기준)<span class="required-field">* 필수입력값 항목입니다.</span><hr class="section-hr"></h4>
+                        <div class="container custom-container">
+                            <div class="row">
+                                <div class="col-sm-3 left-content">
+                                    <!-- 왼쪽 컨텐츠의 내용을 추가하세요 -->
+                                </div>
+                                <div class="col-sm-9 right-content">
+                                    <div class="row custom-row">
+                                        <div class="col-6 col-sm-6">
+                                            <h8 id="code-heading" class="custom-heading">식별코드<span class="highlight-text">*</span>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="식별코드를 선택해주세요." aria-label="식별코드를 선택해주세요." aria-describedby="button-addon2">
+                                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">식별코드검색</button>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                        <div class="col-6 col-sm-6">
+                                            <h8 id="school-heading" class="custom-heading">학교명<span class="highlight-text">*</span>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" placeholder="학교명을 선택해주세요." aria-label="학교명을 선택해주세요." aria-describedby="button-addon2">
+                                                    <button class="btn btn-outline-secondary" type="button" id="button-addon2">학교명검색</button>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                    </div>
+                                    <div class="row custom-row">
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="name-heading" class="custom-heading">성명<span class="highlight-text">*</span>
+                                                <div class="mb-3">
+                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="이름을 입력하세요.">
+                                                </div>
+                                            </h8>                                
+                                        </div>
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="dob-heading" class="custom-heading">생년월일<span class="highlight-text">*</span>
+                                                <div class="mb-3">
+                                                    <input type="date" class="form-control" id="birthdate" name="birthdate" data-placeholder="생년월일을 입력해주세요." required>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="gender-heading" class="custom-heading">성별<span class="highlight-text">*</span>
+                                                <div class="gender-checkboxes">
+                                                    <label>
+                                                        <input type="radio" name="gender" value="male" checked>
+                                                        남자
+                                                    </label>
+                                                    <label>
+                                                        <input type="radio" name="gender" value="female">
+                                                        여자
+                                                    </label>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                    </div>
+                                    <div class="row custom-row">
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="sport-heading" class="custom-heading">종목<span class="highlight-text">*</span>
+                                                <div class="select">
+                                                    <div class="selected">
+                                                        <div class="selected-value">종목을 선택해주세요.</div>
+                                                        <div class="arrow"></div>
+                                                    </div>
+                                                    <ul>
+                                                        <li class="option">전체</li>
+                                                        <li class="option">이름</li>
+                                                        <li class="option">종목</li>
+                                                    </ul>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="phone-heading" class="custom-heading">근무지 전화번호</h8><span class="highlight-text">*</span>
+                                            <div class="d-inline-flex">
+                                                <input type="text" size="3" name="tel1" class="form-control custom-input" placeholder="063">
+                                                <span class="dash">-</span>                                                
+                                                <input type="text" size="4" name="tel2" class="form-control custom-input" placeholder="1234">
+                                                <span class="dash">-</span>
+                                                <input type="text" size="4" name="tel3" class="form-control custom-input" placeholder="5678">
+                                            </div>
+                                        </div>
+                                        <div class="col-4 col-sm-4">
+                                            <h8 id="hire-date-heading" class="custom-heading">최초채용<span class="highlight-text">*</span>
+                                                <div class="mb-3">
+                                                    <input type="date" class="form-control" id="hire" name="hire" data-placeholder="최초채용일을 선택해주세요." required>
+                                                    <p>최초 채용일은 <span class="highlight-text">전라북도 교육청 소속 최초 채용일을</span> 선택해주세요.</p>
+                                                </div>
+                                            </h8>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="section-heading2">2. 근무 이력(전라북도교육청 소속 - 최초 채용일로부터)<span class="required-field">필수입력값 항목입니다.</span><hr class="section-hr">
+                        <p>※ 현재 근무 중인 경우 근무 종료일을 입력하지 마십시오.</p>
+                            <table id="myTable1">
+                                <tr>
+                                    <th>근무기관</th>
+                                    <th>근무시작일</th>
+                                    <th>근무종료일</th>
+                                    <th>종목</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="학교명을 입력해주세요."></td>
+                                    <td><input type="date" class="form-control" id="start-date" name="start-date" data-placeholder="근무 시작일을 선택해주세요." required></td>
+                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="근무 종료일을 선택해주세요." required></td>
+                                    <td>
+                                        <select>
+                                            <option value="" disabled selected>종목을 선택해주세요.</option>
+                                            <option value="option1">옵션 1</option>
+                                            <option value="option2">옵션 2</option>
+                                            <option value="option3">옵션 3</option>
+                                        </select>
+                                        <button onclick="addRow(this)">추가</button>
+                                    </td>
+                                </tr>                            
+                            </table>
+                        </h4>
+                        <h4 class="section-heading3">3. 자격사항<span class="required-field">필수입력값 항목입니다.</span><hr class="section-hr">
+                            <table id="myTable2">
+                                <tr>
+                                    <th>자격/면허</th>
+                                    <th>자격번호</th>
+                                    <th>취득일자</th>
+                                    <th>발급기관</th>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" placeholder="자격을 입력해주세요."></td>
+                                    <td><input type="text" placeholder="영문, 숫자만 입력해주세요."></td>
+                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="취득일자를 선택해주세요." required></td>
+                                    <td>
+                                        <input type="text" placeholder="발급기관을 입력해주세요.">
+                                        <button onclick="addRow(this)">추가</button>
+                                    </td>
+                                </tr>                            
+                            </table>
+                        </h4>
+                        <div class="button-box">
+                            <div class="button register" onClick="location.href='register.html'">지도자 등록하기</div>
+                            <div class="button delete">삭제하기</div>
+                        </div>
+                    </div>
+
+                </div>     
+                
+
 
                 <div id="footer">
                     <small>&copy;2023 Copyright bt HEADIT All Rights Reserved.</small>
@@ -41,7 +185,83 @@
             </div>
         </div>
     </div>
+    <script>
+        const selectBoxElements = document.querySelectorAll(".select");
 
+        function toggleSelectBox(selectBox) {
+        selectBox.classList.toggle("active");
+        }
+
+        function selectOption(optionElement) {
+        const selectBox = optionElement.closest(".select");
+        const selectedElement = selectBox.querySelector(".selected-value");
+        selectedElement.textContent = optionElement.textContent;
+        }
+
+        selectBoxElements.forEach(selectBoxElement => {
+        selectBoxElement.addEventListener("click", function (e) {
+            const targetElement = e.target;
+            const isOptionElement = targetElement.classList.contains("option");
+
+            if (isOptionElement) {
+            selectOption(targetElement);
+            }
+
+            toggleSelectBox(selectBoxElement);
+        });
+        });
+
+        document.addEventListener("click", function (e) {
+        const targetElement = e.target;
+        const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+
+        if (isSelect) {
+            return;
+        }
+
+        const allSelectBoxElements = document.querySelectorAll(".select");
+
+        allSelectBoxElements.forEach(boxElement => {
+            boxElement.classList.remove("active");
+        });
+        });
+        // --------------------------------------
+        function addRow(button) {
+            var row = button.parentNode.parentNode; // 현재 행 가져오기
+            var newRow = row.cloneNode(true); // 행 복제
+
+            // 새로 생성된 행의 입력값 초기화
+            var inputs = newRow.querySelectorAll('input');
+            inputs.forEach(function (input) {
+                input.value = '';
+            });
+
+            // 새로 생성된 행의 select 초기화
+            var select = newRow.querySelector('select');
+            select.selectedIndex = 0;
+
+            // "추가" 버튼을 "삭제" 버튼으로 변경
+            var buttons = newRow.querySelectorAll('button');
+            buttons.forEach(function (button) {
+                if (button.textContent === '추가') {
+                    button.textContent = '삭제';
+                    button.onclick = function () {
+                        deleteRow(this);
+                    };
+                }
+            });
+
+            // 새로운 행을 현재 행 다음에 추가
+            row.parentNode.insertBefore(newRow, row.nextSibling);
+        }
+
+        function deleteRow(button) {
+            var row = button.parentNode.parentNode; // 현재 행 가져오기
+            row.parentNode.removeChild(row); // 행 삭제
+        }
+        // 
+        
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

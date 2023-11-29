@@ -33,11 +33,17 @@
                 <div class="container" id="container1">
                     <h7>검색 조회</h7>
                     <div class="search-box">
-                        <select name="option">
-                            <option selected>전체</option>
-                            <option value="1">이름</option>
-                            <option value="2">종목</option>
-                        </select>
+                        <div class="select">
+                            <div class="selected">
+                                <div class="selected-value">전체</div>
+                                <div class="arrow"></div>
+                            </div>
+                            <ul>
+                                <li class="option">전체</li>
+                                <li class="option">이름</li>
+                                <li class="option">종목</li>
+                            </ul>
+                        </div>
                          <!-- select, option으로 구성하면 option을 디자인 할 수 없음. 때문에 ul과 li로 코드짜기 -->
                         <div class="input-box">
                             <input type="text" placeholder="이름을 입력해주세요.">
@@ -66,6 +72,47 @@
         
     </div>
 
+    <script>
+        const selectBoxElements = document.querySelectorAll(".select");
+
+        function toggleSelectBox(selectBox) {
+        selectBox.classList.toggle("active");
+        }
+
+        function selectOption(optionElement) {
+        const selectBox = optionElement.closest(".select");
+        const selectedElement = selectBox.querySelector(".selected-value");
+        selectedElement.textContent = optionElement.textContent;
+        }
+
+        selectBoxElements.forEach(selectBoxElement => {
+        selectBoxElement.addEventListener("click", function (e) {
+            const targetElement = e.target;
+            const isOptionElement = targetElement.classList.contains("option");
+
+            if (isOptionElement) {
+            selectOption(targetElement);
+            }
+
+            toggleSelectBox(selectBoxElement);
+        });
+        });
+
+        document.addEventListener("click", function (e) {
+        const targetElement = e.target;
+        const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+
+        if (isSelect) {
+            return;
+        }
+
+        const allSelectBoxElements = document.querySelectorAll(".select");
+
+        allSelectBoxElements.forEach(boxElement => {
+            boxElement.classList.remove("active");
+        });
+        });
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

@@ -88,12 +88,12 @@
     margin-left: 60px;
 }
 
-/* 컨텐츠 박스 */
+/* 컨텐츠 박스 1-1 */
 #container1 {
     margin-top: 60px;
     margin-left: 60px;
     margin-bottom: 156px;
-    width: 1280px;
+    width: 1500px;
     height: 1253px;
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
@@ -102,13 +102,13 @@
     color: #212529;
 }
 
-#container1 .section-heading {
+#container1 .section-heading1 {
     font-weight: bold;
     margin-top: 43px;
     margin-left: 40px;
 }
 
-.required-field {
+#container1 .section-heading1 .required-field {
     color: red; 
     font-weight: bold;
     margin-left: 650px; 
@@ -119,8 +119,418 @@
     width : 1200px;
     border: 2px solid #238AF7;
     margin-right: 39px;
-  }
+}
   
+/* ------------------------------------------ */
+.custom-container {
+    padding-right: 25px;
+    padding-top: 25px;
+}
+
+.custom-row {
+    margin-bottom: 25px;
+}
+
+/* ------------------------------------------ */
+
+#container1 .btn {
+    background-color: #238AF7;
+    color: white;
+    font-size: 15px;
+}
+
+#container1 #code-heading {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#container1 #code-heading .input-group{
+    height: 43px;
+    width: 435px;
+    margin-top: 10px;
+}
+
+#container1 #code-heading input.form-control {
+    font-size: 15px;
+    color: #969696; 
+    border-color: #DDDDDD; 
+}
+
+/* ------------------------------------------ */
+
+#container1 #school-heading {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#container1 #school-heading .input-group{
+    height: 43px;
+    width: 435px;
+    margin-top: 10px;
+}
+
+#container1 #school-heading input.form-control {
+    font-size: 15px;
+    color: #969696; 
+    border-color: #DDDDDD; 
+}
+
+/* ------------------------------------------ */
+
+#container1 #name-heading {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#container1 #name-heading .mb-3 {
+    margin-top: 10px;
+    height: 43px;
+    width: 281px;
+    color: #969696;
+}
+
+/* ------------------------------------------ */
+#container1 #dob-heading {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15px;
+}
+
+#container1 #dob-heading .mb-3 {
+    height: 43px;
+    width: 281px;
+    margin-top: 10px;
+    margin-left: 15px;
+}
+
+#container1 #dob-heading input[type="date"]::before {
+    content: attr(data-placeholder);
+    width: 100%;
+}
+
+#container1 #dob-heading input[type="date"]:valid::before {
+    display: none;
+}
+
+#container1 #dob-heading input[data-placeholder]::before {
+    color: #969696;
+    font-size: 15px;
+}
+
+/* ------------------------------------------ */
+#container1 #gender-heading {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+
+#container1 #gender-heading .gender-checkboxes {
+    margin-top: 17px;
+    margin-left: 20px;
+
+}
+
+#container1 #gender-heading input[type="radio"] {
+    width: 19px;
+    height: 19px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+#container1 #gender-heading .gender-checkboxes label {
+    margin-right: 20px;
+}
+
+/* ------------------------------------------ */
+#container1 #sport-heading {
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#container1 #sport-heading .select{
+    margin-top: 10px;
+    height: 43px;
+    width: 281px;
+}
+
+#container1 .select {
+    width: 179px;
+    height: 35px;
+    margin-right: 13px;
+}
+
+#container1 .selected {
+    display: flex;
+    align-items: center;
+    padding: 13px 12px;
+    border: 1px solid #EEEEEE;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+#container1 .selected-value {
+    color: #969696;
+    font-size: 15px;
+}
+
+#container1 .arrow {
+    border: 2px solid #969696;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg);
+    margin-left: 100px;
+    margin-bottom: 5px;
+}
+
+#container1 ul {
+    width: 179px;
+    height: 35px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    display: none;
+    box-sizing: border-box;
+}
+
+#container1 .option {
+    padding: 8px;
+    font-size: 13px;
+    color: #212529;
+    cursor: pointer;
+    background-color: #ffffff;
+    border: 2px solid #EEEEEE;
+
+}
+
+#container1 .option:first-child {
+    border-bottom: none; 
+}
+
+#container1 .option:nth-child(2) {
+    border-bottom: none;
+    border-top: none;
+}
+
+#container1 .option:last-child {
+    border-top: none; 
+}
+
+#container1 .option:hover {
+    background-color: #EEEEEE;
+    color: rgb(0, 0, 0);
+}
+
+#container1 .select.active ul {
+    display: block;
+}
+
+/* ------------------------------------------ */
+#phone-heading {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 18px;
+}
+
+.d-inline-flex .dash {
+    margin: 0 8px;
+    color: #2C2C2C;
+    font-weight: normal;
+    font-size: 15px;
+    vertical-align: middle;
+    margin-top: 10px;
+}
+
+.d-inline-flex{
+    margin-top: 10px;
+    margin-left: 16px;
+}
+
+input[name="tel1"].custom-input {
+    width: 69px;
+    height: 43px;
+}
+
+input[name="tel2"].custom-input {
+    width: 83px;
+    height: 43px;
+}
+
+input[name="tel3"].custom-input {
+    width: 83px;
+    height: 43px;
+}
+
+/* ------------------------------------------ */
+#container1 #hire-date-heading {
+    margin-left: 19px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#hire-date-heading .mb-3 {
+    margin-top: 10px;
+    margin-left: 18px;
+    width: 255px;
+    height: 43px;
+
+}
+
+#container1 #hire-date-heading input[type="date"]::before {
+    content: attr(data-placeholder);
+    width: 100%;
+}
+
+#container1 #hire-date-heading input[type="date"]:valid::before {
+    display: none;
+}
+
+#container1 #hire-date-heading input[data-placeholder]::before {
+    color: #969696;
+    font-size: 15px;
+}
+
+#container1 #hire-date-heading p {
+    margin-top: 7.5px;
+    color: #2C2C2C;
+    font-size: 11px;
+}
+
+.highlight-text {
+    color: #DD4B39;
+}
+
+/* 컨텐츠 박스 1-2 */
+#container1 .section-heading2 {
+    font-weight: bold;
+    margin-top: 43px;
+    margin-left: 40px;
+}
+
+#container1 .section-heading2 .required-field {
+    color: red; 
+    font-weight: bold;
+    margin-left: 460px; 
+    font-size: 13px;
+}
+
+#container1 .section-heading2 p {
+    margin-top: 19px;
+    color: #0F2D6A;
+    font-size: 15.5px;
+    font-weight: bold;
+}
+
+/* 테이블 전체 스타일 */
+#container1 .section-heading2 table {
+    width: 97%;
+    /* border-collapse: collapse; */
+    margin-top: 10px;
+}
+
+#container1 .section-heading2 th {
+    border-top: 2px solid #EEEEEE;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #EEEEEE;
+    font-size: 15.5px;
+    font-weight: bold;
+    padding: 14px;
+    text-align: center;
+}
+
+#container1 .section-heading2 th:last-child {
+    text-align: center;
+  }
+
+  /* 행 스타일 */
+#container1 .section-heading2 tr {
+    border-bottom: 1px solid #ddd; /* 행 간 구분선 */
+}
+  
+  /* 셀 스타일 */
+#container1 .section-heading2 td {
+    padding: 8px;
+    text-align: center;
+}
+
+#container1 #start-date input[type="date"]::before {
+    content: attr(data-placeholder);
+    width: 100%;
+}
+
+#container1 #start-date input[type="date"]:valid::before {
+    display: none;
+}
+
+#container1 #start-date input[data-placeholder]::before {
+    color: #969696;
+    font-size: 15px;
+}
+#container1 #dob-heading input[type="date"]::before {
+    content: attr(data-placeholder);
+    width: 100%;
+}
+
+#container1 #dob-heading input[type="date"]:valid::before {
+    display: none;
+}
+
+#container1 #dob-heading input[data-placeholder]::before {
+    color: #969696;
+    font-size: 15px;
+}
+
+  /* 입력 필드 스타일 */
+#container1 .section-heading2 input[type="text"],input[type="date"] {
+    width: 263px;
+    height: 43px;
+    font-size: 15px;
+    border: 1px solid #EEEEEE;
+    border-radius: 0.5em;
+}
+  
+  /* 셀렉트 박스 스타일 */
+#container1 .section-heading2 select {
+    border: 1px solid #EEEEEE;
+    border-radius: 0.5em;
+    font-size: 15px;
+    width: 264px;
+    height: 43px;
+    padding: 8px;
+}
+  
+  /* 버튼 스타일 */
+#container1 .section-heading2 button {
+    width: 56px;
+    height: 44px;
+    font-size: 15px;
+    background-color: #238AF7;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 0.2em;
+}
+  
+
+  
+
+/* 컨텐츠 박스 1-3 */
+#container1 .section-heading3 {
+    font-weight: bold;
+    margin-top: 43px;
+    margin-left: 40px;
+}
+
+#container1 .section-heading3 .required-field {
+    color: red; 
+    font-weight: bold;
+    margin-left: 936px; 
+    font-size: 13px;
+}
+
 
 /* 꼬리말 */
 #footer {

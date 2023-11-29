@@ -88,6 +88,7 @@
     margin-left: 60px;
 }
 
+
 /* 컨텐츠 박스 1 */
 #container1 {
     margin-top: 60px;
@@ -118,30 +119,91 @@
     color: #212529;
 }
 
-#container1 select[name="option"]{
-    width: 180px;
-    height: 36px;
-    margin-right: 12px;
-    border-radius: 0.5em;
+/* ----------------------------------------------------------- */
+
+#container1 .select {
+    width: 179px;
+    height: 35px;
+    margin-right: 13px;
+}
+
+#container1 .selected {
+    display: flex;
+    align-items: center;
+    padding: 6px 10px;
     border: 2px solid #EEEEEE;
+    border-radius: 0.5em;
+    cursor: pointer;
+}
+
+#container1 .selected-value {
     font-weight: bold;
     font-size: 13px;
     color: #212529;
-    padding: 5px 10px;
+}
+
+#container1 .arrow {
+    border: 2px solid #5D5D5D;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 4px;
+    transform: rotate(45deg);
+    margin-left: 111px;
+    margin-bottom: 5px;
+}
+
+#container1 ul {
+    width: 179px;
+    height: 35px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 35%;
+    display: none;
+    box-sizing: border-box;
+}
+
+#container1 .option {
+    padding: 8px;
+    font-weight: bold;
+    font-size: 13px;
+    color: #212529;
     cursor: pointer;
+    background-color: #ffffff;
+    border: 2px solid #EEEEEE;
 
 }
 
-/* #container1 select[name="option"]:after{
-    content: '';
-    display: block; 
-    width: 2px;
-    height: 100%; 
-    position: absolute; 
-    top: 0; 
-    right: 35px;
-    background: #ffffff;
-} */
+#container1 .option:first-child {
+    border-bottom: none; 
+}
+
+#container1 .option:nth-child(2) {
+    border-bottom: none;
+    border-top: none;
+}
+
+#container1 .option:last-child {
+    border-top: none; 
+}
+
+#container1 .option:hover {
+    background-color: #EEEEEE;
+    color: rgb(0, 0, 0);
+}
+
+#container1 .select.active ul {
+    display: block;
+}
+
+/* ----------------------------------------------------------- */
+
+#container1 select option:checked {
+    background-color: #EEEEEE;
+    color: rgb(0, 0, 0);
+}
+
 
 #container1 .search-box .input-box input{
     width: 220px;
@@ -169,6 +231,8 @@
     padding-top: 6px;
     cursor: pointer;
 }
+
+
 
 /* 컨텐츠 박스2 */
 #container2{

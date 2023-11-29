@@ -36,14 +36,21 @@
                         <div class="container custom-container">
                             <div class="row">
                                 <div class="col-sm-3 left-content">
-                                    <!-- 왼쪽 컨텐츠의 내용을 추가하세요 -->
+                                    <div id="image-container">
+                                        <label for="file-input" id="image-placeholder">
+                                          <div id="upload-button">사진 첨부하기</div>
+                                        </label>
+                                        <input type="file" id="file-input" accept="image/*">
+                                        <img id="selected-image" alt="">
+                                        <p>파일 크기는 MB 이하로 등록해주세요.</p>
+                                    </div>
                                 </div>
                                 <div class="col-sm-9 right-content">
                                     <div class="row custom-row">
                                         <div class="col-6 col-sm-6">
                                             <h8 id="code-heading" class="custom-heading">식별코드<span class="highlight-text">*</span>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control" placeholder="식별코드를 선택해주세요." aria-label="식별코드를 선택해주세요." aria-describedby="button-addon2">
+                                                    <input type="text" class="form-control" placeholder="식별코드를 선택해주세요." aria-label="식별코드를 선택해주세요." aria-describedby="button-addon2" required>
                                                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">식별코드검색</button>
                                                 </div>
                                             </h8>
@@ -51,7 +58,7 @@
                                         <div class="col-6 col-sm-6">
                                             <h8 id="school-heading" class="custom-heading">학교명<span class="highlight-text">*</span>
                                                 <div class="input-group mb-3">
-                                                    <input type="text" class="form-control" placeholder="학교명을 선택해주세요." aria-label="학교명을 선택해주세요." aria-describedby="button-addon2">
+                                                    <input type="text" class="form-control" placeholder="학교명을 선택해주세요." aria-label="학교명을 선택해주세요." aria-describedby="button-addon2" required>
                                                     <button class="btn btn-outline-secondary" type="button" id="button-addon2">학교명검색</button>
                                                 </div>
                                             </h8>
@@ -61,9 +68,9 @@
                                         <div class="col-4 col-sm-4">
                                             <h8 id="name-heading" class="custom-heading">성명<span class="highlight-text">*</span>
                                                 <div class="mb-3">
-                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="이름을 입력하세요.">
+                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="이름을 입력하세요." required>
                                                 </div>
-                                            </h8>                                
+                                            </h8>
                                         </div>
                                         <div class="col-4 col-sm-4">
                                             <h8 id="dob-heading" class="custom-heading">생년월일<span class="highlight-text">*</span>
@@ -96,9 +103,9 @@
                                                         <div class="arrow"></div>
                                                     </div>
                                                     <ul>
-                                                        <li class="option">전체</li>
-                                                        <li class="option">이름</li>
-                                                        <li class="option">종목</li>
+                                                        <li class="option">옵션1</li>
+                                                        <li class="option">옵션2</li>
+                                                        <li class="option">옵션3</li>
                                                     </ul>
                                                 </div>
                                             </h8>
@@ -136,8 +143,8 @@
                                 </tr>
                                 <tr>
                                     <td><input type="text" placeholder="학교명을 입력해주세요."></td>
-                                    <td><input type="date" class="form-control" id="start-date" name="start-date" data-placeholder="근무 시작일을 선택해주세요." required></td>
-                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="근무 종료일을 선택해주세요." required></td>
+                                    <td><input type="date" class="form-control" id="start-date" name="start-date" data-placeholder="근무 시작일을 선택해주세요."></td>
+                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="근무 종료일을 선택해주세요."></td>
                                     <td>
                                         <select>
                                             <option value="" disabled selected>종목을 선택해주세요.</option>
@@ -145,7 +152,7 @@
                                             <option value="option2">옵션 2</option>
                                             <option value="option3">옵션 3</option>
                                         </select>
-                                        <button onclick="addRow(this)">추가</button>
+                                        <button onclick="addRow1(this)">추가</button>
                                     </td>
                                 </tr>                            
                             </table>
@@ -161,17 +168,18 @@
                                 <tr>
                                     <td><input type="text" placeholder="자격을 입력해주세요."></td>
                                     <td><input type="text" placeholder="영문, 숫자만 입력해주세요."></td>
-                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="취득일자를 선택해주세요." required></td>
+                                    <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="취득일자를 선택해주세요." required>
+                                    </td>
                                     <td>
                                         <input type="text" placeholder="발급기관을 입력해주세요.">
-                                        <button onclick="addRow(this)">추가</button>
+                                        <button onclick="addRow2(this)">추가</button>
                                     </td>
                                 </tr>                            
                             </table>
                         </h4>
                         <div class="button-box">
-                            <div class="button register" onClick="location.href='register.html'">지도자 등록하기</div>
-                            <div class="button delete">삭제하기</div>
+                            <div class="button delete">취소하기</div>
+                            <div class="button register">등록하기</div>
                         </div>
                     </div>
 
@@ -186,6 +194,25 @@
         </div>
     </div>
     <script>
+        document.getElementById("file-input").addEventListener("change", function () {
+            const fileInput = this;
+            const imagePlaceholder = document.getElementById("image-placeholder");
+            const selectedImage = document.getElementById("selected-image");
+
+            if (fileInput.files && fileInput.files[0]) {
+                const reader = new FileReader();
+
+                reader.onload = function (e) {
+                selectedImage.src = e.target.result;
+                selectedImage.style.display = "block";
+                imagePlaceholder.style.display = "none";
+                };
+
+                reader.readAsDataURL(fileInput.files[0]);
+            }
+        });
+
+    // ---------------------------------------------------------
         const selectBoxElements = document.querySelectorAll(".select");
 
         function toggleSelectBox(selectBox) {
@@ -226,7 +253,7 @@
         });
         });
         // --------------------------------------
-        function addRow(button) {
+        function addRow1(button) {
             var row = button.parentNode.parentNode; // 현재 행 가져오기
             var newRow = row.cloneNode(true); // 행 복제
 
@@ -236,31 +263,60 @@
                 input.value = '';
             });
 
-            // 새로 생성된 행의 select 초기화
-            var select = newRow.querySelector('select');
-            select.selectedIndex = 0;
+        // 새로 생성된 행의 select 초기화
+        var select = newRow.querySelector('select');
+        select.selectedIndex = 0;
 
-            // "추가" 버튼을 "삭제" 버튼으로 변경
-            var buttons = newRow.querySelectorAll('button');
-            buttons.forEach(function (button) {
-                if (button.textContent === '추가') {
-                    button.textContent = '삭제';
-                    button.onclick = function () {
-                        deleteRow(this);
-                    };
-                }
-            });
+        // "추가" 버튼을 "삭제" 버튼으로 변경
+        var buttons = newRow.querySelectorAll('button');
+        buttons.forEach(function (button) {
+            if (button.textContent === '추가') {
+                button.textContent = '삭제';
+                button.onclick = function () {
+                    deleteRow1(this);
+                };
+                button.classList.add('delete'); // 삭제 버튼에 'delete' 클래스 추가
+            }
+        });
 
-            // 새로운 행을 현재 행 다음에 추가
-            row.parentNode.insertBefore(newRow, row.nextSibling);
-        }
+        // 새로운 행을 현재 행 다음에 추가
+        row.parentNode.insertBefore(newRow, row.nextSibling);
+    }
 
-        function deleteRow(button) {
-            var row = button.parentNode.parentNode; // 현재 행 가져오기
-            row.parentNode.removeChild(row); // 행 삭제
-        }
-        // 
-        
+    function deleteRow1(button) {
+        var row = button.parentNode.parentNode; // 현재 행 가져오기
+        row.parentNode.removeChild(row); // 행 삭제
+    }
+
+    function addRow2(button) {
+        var row = button.parentNode.parentNode; // 현재 행 가져오기
+        var newRow = row.cloneNode(true); // 행 복제
+
+        // 새로 생성된 행의 입력값 초기화
+        var inputs = newRow.querySelectorAll('input');
+        inputs.forEach(function (input) {
+            input.value = '';
+        });
+
+        // "추가" 버튼을 "삭제" 버튼으로 변경
+        var buttons = newRow.querySelectorAll('button');
+        buttons.forEach(function (button) {
+            if (button.textContent === '추가') {
+                button.textContent = '삭제';
+                button.onclick = function () {
+                    deleteRow2(this);
+                };
+                button.classList.add('delete');
+            }
+        });
+
+        row.parentNode.insertBefore(newRow, row.nextSibling);
+    }
+
+    function deleteRow2(button) {
+            var row = button.parentNode.parentNode; 
+            row.parentNode.removeChild(row); 
+    }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>

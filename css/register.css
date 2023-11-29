@@ -94,7 +94,7 @@
     margin-left: 60px;
     margin-bottom: 156px;
     width: 1500px;
-    height: 1253px;
+    height: 1300px;
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
     border-radius: 0.5em;
@@ -132,6 +132,67 @@
 }
 
 /* ------------------------------------------ */
+#container1 #image-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+}
+  
+#container1 #image-placeholder {
+    margin-top: 5px;
+    margin-left: 35px;
+    width: 243px;
+    height: 315px;
+    background-color: #ccc;
+    top: 0;
+    left: 10;
+    cursor: pointer;
+    border-radius: 0.5em;
+    background-color: #F2F4F5;
+    border: 2px solid #dad9d9;
+}
+
+#container1 #upload-button {
+    margin-top: 242px;
+    margin-left: 17px;
+    width: 203px;
+    height: 47px;
+    padding-top: 10px;
+    padding-left: 50px;
+    background-color: white;
+    color: #0F2D6A;
+    cursor: pointer;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+}
+  
+#container1 #selected-image {
+    top: 0;
+    left: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5px;
+    margin-left: 35px;
+    width: 243px;
+    height: 315px;
+    border-radius: 0.5em;
+    display: none;
+}
+
+#container1 #image-container p {
+    color: #DD4B39;
+    font-size: 12px;
+    margin-top: 3px;
+    margin-left: 35px;
+    font-weight: bold;
+}
+  
+#container1 #file-input {
+    display: none;
+}
+
+/* ------------------------------------------ */
 
 #container1 .btn {
     background-color: #238AF7;
@@ -142,6 +203,10 @@
 #container1 #code-heading {
     font-size: 15px;
     font-weight: bold;
+}
+
+#container1 #code-heading input {
+    pointer-events: none;
 }
 
 #container1 #code-heading .input-group{
@@ -156,11 +221,20 @@
     border-color: #DDDDDD; 
 }
 
+#container1 #code-heading input::placeholder {
+    font-size: 15px;
+    color: #969696; 
+}
+
 /* ------------------------------------------ */
 
 #container1 #school-heading {
     font-size: 15px;
     font-weight: bold;
+}
+
+#container1 #school-heading input {
+    pointer-events: none;
 }
 
 #container1 #school-heading .input-group{
@@ -175,6 +249,11 @@
     border-color: #DDDDDD; 
 }
 
+#container1 #school-heading input::placeholder {
+    font-size: 15px;
+    color: #969696; 
+}
+
 /* ------------------------------------------ */
 
 #container1 #name-heading {
@@ -186,7 +265,10 @@
     margin-top: 10px;
     height: 43px;
     width: 281px;
+}
+#container1 #name-heading input::placeholder {
     color: #969696;
+    font-size: 15px;
 }
 
 /* ------------------------------------------ */
@@ -249,20 +331,19 @@
 
 #container1 #sport-heading .select{
     margin-top: 10px;
-    height: 43px;
     width: 281px;
 }
 
 #container1 .select {
+    font-weight: normal;
     width: 179px;
-    height: 35px;
     margin-right: 13px;
 }
 
 #container1 .selected {
     display: flex;
     align-items: center;
-    padding: 13px 12px;
+    padding: 10px 9px;
     border: 1px solid #EEEEEE;
     border-radius: 0.5em;
     cursor: pointer;
@@ -279,18 +360,16 @@
     display: inline-block;
     padding: 4px;
     transform: rotate(45deg);
-    margin-left: 100px;
     margin-bottom: 5px;
 }
 
 #container1 ul {
-    width: 179px;
+    width: 281px;
     height: 35px;
     list-style: none;
     padding: 0;
-    margin: 0;
+    margin-top: 5px;
     position: absolute;
-    top: 35%;
     display: none;
     box-sizing: border-box;
 }
@@ -424,13 +503,14 @@ input[name="tel3"].custom-input {
 }
 
 /* 테이블 전체 스타일 */
-#container1 .section-heading2 table {
+#container1 .section-heading2 table,
+#container1 .section-heading3 table {
     width: 97%;
-    /* border-collapse: collapse; */
     margin-top: 10px;
 }
 
-#container1 .section-heading2 th {
+#container1 .section-heading2 th,
+#container1 .section-heading3 th {
     border-top: 2px solid #EEEEEE;
     border-left: none;
     border-right: none;
@@ -441,58 +521,42 @@ input[name="tel3"].custom-input {
     text-align: center;
 }
 
-#container1 .section-heading2 th:last-child {
-    text-align: center;
-  }
-
-  /* 행 스타일 */
-#container1 .section-heading2 tr {
-    border-bottom: 1px solid #ddd; /* 행 간 구분선 */
+/* 행 스타일 */
+#container1 .section-heading2 tr,
+#container1 .section-heading3 tr {
+    border-bottom: 1px solid #ddd;
 }
   
-  /* 셀 스타일 */
-#container1 .section-heading2 td {
+/* 셀 스타일 */
+#container1 .section-heading2 td,
+#container1 .section-heading3 td {
     padding: 8px;
     text-align: center;
 }
 
-#container1 #start-date input[type="date"]::before {
-    content: attr(data-placeholder);
-    width: 100%;
-}
-
-#container1 #start-date input[type="date"]:valid::before {
-    display: none;
-}
-
-#container1 #start-date input[data-placeholder]::before {
-    color: #969696;
-    font-size: 15px;
-}
-#container1 #dob-heading input[type="date"]::before {
-    content: attr(data-placeholder);
-    width: 100%;
-}
-
-#container1 #dob-heading input[type="date"]:valid::before {
-    display: none;
-}
-
-#container1 #dob-heading input[data-placeholder]::before {
-    color: #969696;
-    font-size: 15px;
-}
-
-  /* 입력 필드 스타일 */
-#container1 .section-heading2 input[type="text"],input[type="date"] {
+/* 입력 필드 스타일 */
+#container1 .section-heading2 input[type="text"],input[type="date"],
+#container1 .section-heading3 input[type="text"],input[type="date"] {
     width: 263px;
     height: 43px;
     font-size: 15px;
     border: 1px solid #EEEEEE;
     border-radius: 0.5em;
 }
-  
-  /* 셀렉트 박스 스타일 */
+
+#container1 .section-heading2 input::placeholder{
+    font-size: 15px;
+    color: #969696;
+    padding-left: 5px;
+}
+
+#container1 .section-heading3 input::placeholder{
+    font-size: 15px;
+    color: #969696;
+    padding-left: 5px;
+}
+
+/* 셀렉트 박스 스타일 */
 #container1 .section-heading2 select {
     border: 1px solid #EEEEEE;
     border-radius: 0.5em;
@@ -500,10 +564,13 @@ input[name="tel3"].custom-input {
     width: 264px;
     height: 43px;
     padding: 8px;
+    font-size: 15px;
+    color: #969696;
 }
-  
-  /* 버튼 스타일 */
-#container1 .section-heading2 button {
+
+/* 버튼 스타일 */
+#container1 .section-heading2 button,
+#container1 .section-heading3 button {
     width: 56px;
     height: 44px;
     font-size: 15px;
@@ -514,7 +581,10 @@ input[name="tel3"].custom-input {
     border-radius: 0.2em;
 }
   
-
+#container1 .section-heading2 button.delete,
+#container1 .section-heading3 button.delete {
+    background-color: #969696;
+}
   
 
 /* 컨텐츠 박스 1-3 */
@@ -531,6 +601,36 @@ input[name="tel3"].custom-input {
     font-size: 13px;
 }
 
+.button-box {
+    margin-top: 115px;
+    display: flex;
+    align-items: center;
+}
+
+.button {
+    width: 139px;
+    height: 55px;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 0.5em; 
+}
+
+.button.delete {
+    color: #0F2D6A;
+    border: 1px solid #0F2D6A;
+    margin-right: 8.5px;
+    padding-left: 38px;
+    padding-top: 15px;
+}
+
+.button.register {
+    background-color: #0F2D6A;
+    color: white;
+    padding-left: 38px;
+    padding-top: 15px;
+}
 
 /* 꼬리말 */
 #footer {

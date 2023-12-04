@@ -1,39 +1,39 @@
 const selectBoxElements = document.querySelectorAll(".select");
 
-        function toggleSelectBox(selectBox) {
-        selectBox.classList.toggle("active");
-        }
+    function toggleSelectBox(selectBox) {
+    selectBox.classList.toggle("active");
+    }
 
-        function selectOption(optionElement) {
-        const selectBox = optionElement.closest(".select");
-        const selectedElement = selectBox.querySelector(".selected-value");
-        selectedElement.textContent = optionElement.textContent;
-        }
+    function selectOption(optionElement) {
+    const selectBox = optionElement.closest(".select");
+    const selectedElement = selectBox.querySelector(".selected-value");
+    selectedElement.textContent = optionElement.textContent;
+    }
 
-        selectBoxElements.forEach(selectBoxElement => {
-        selectBoxElement.addEventListener("click", function (e) {
-            const targetElement = e.target;
-            const isOptionElement = targetElement.classList.contains("option");
-
-            if (isOptionElement) {
-            selectOption(targetElement);
-            }
-
-            toggleSelectBox(selectBoxElement);
-        });
-        });
-
-        document.addEventListener("click", function (e) {
+    selectBoxElements.forEach(selectBoxElement => {
+    selectBoxElement.addEventListener("click", function (e) {
         const targetElement = e.target;
-        const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+        const isOptionElement = targetElement.classList.contains("option");
 
-        if (isSelect) {
-            return;
+        if (isOptionElement) {
+        selectOption(targetElement);
         }
 
-        const allSelectBoxElements = document.querySelectorAll(".select");
+        toggleSelectBox(selectBoxElement);
+    });
+    });
 
-        allSelectBoxElements.forEach(boxElement => {
-            boxElement.classList.remove("active");
-        });
-        });
+    document.addEventListener("click", function (e) {
+    const targetElement = e.target;
+    const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
+
+    if (isSelect) {
+        return;
+    }
+
+    const allSelectBoxElements = document.querySelectorAll(".select");
+
+    allSelectBoxElements.forEach(boxElement => {
+        boxElement.classList.remove("active");
+    });
+});

@@ -236,7 +236,7 @@
 
 #container1 .modal-content {
     width: 700px;
-    height: 700px;
+    height: 900px;
     background-color: #fefefe;
     margin-top: 70px;
     border: 1px solid #DDDDDD;
@@ -328,7 +328,26 @@
 #leaderTable th, #leaderTable td {
     width: 148px;
     padding: 8px;
+}
+
+td:first-child, th:first-child {
+    width: 50px;
     text-align: center;
+}
+
+td:not(:first-child), th:not(:first-child) {
+    text-align: left;
+}
+
+tbody.leaderTable_body {
+    font-weight: bold;
+    height: 50px;
+    font-size: 15px;
+    color: #333;
+}
+
+tr {
+    border-bottom: 1px solid #EEEEEE;
 }
 
 #leaderTable th {
@@ -337,6 +356,8 @@
     border-right: none;
     border-bottom: 2px solid #EEEEEE;
 }
+
+
 /* ------------------------------------------ */
 
 #container1 #school-heading {

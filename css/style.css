@@ -159,7 +159,7 @@
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 35%;
+    top: 30%;
     display: none;
     box-sizing: border-box;
 }
@@ -235,7 +235,7 @@
 
 
 /* 컨텐츠 박스2 */
-#container2{
+#container2 {
     margin-top: 16px;
     margin-left: 60px;
     width: 1280px;
@@ -244,7 +244,7 @@
     background-color: #ffffff;
     border-radius: 0.5em;
     display: flex;
-    align-items: top;
+    flex-direction: column;
 }
 
 #container2 h5{
@@ -256,7 +256,6 @@
 
 #container2 .button-box {
     gap: 12px;
-    margin-top: 19px;
 }
 
 #container2 .button {
@@ -286,6 +285,8 @@
     background-color: #FFE0DF;
     color: #DD4B39;
 }
+
+
 
 /* 꼬리말 */
 #footer {

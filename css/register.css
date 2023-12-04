@@ -236,7 +236,7 @@
 
 #container1 .modal-content {
     width: 700px;
-    height: 900px;
+    height: 700px;
     background-color: #fefefe;
     margin-top: 70px;
     border: 1px solid #DDDDDD;
@@ -314,8 +314,11 @@
 
 /* 지도자 테이블 스타일 */
 #leaderTable {
+    
     margin-top: 20px;
     margin-left: 28px;
+    overflow:auto;
+    height: 400px;
 }
 
 #leaderTable h2{
@@ -328,6 +331,7 @@
 #leaderTable th, #leaderTable td {
     width: 148px;
     padding: 8px;
+
 }
 
 td:first-child, th:first-child {
@@ -343,7 +347,7 @@ tbody.leaderTable_body {
     font-weight: bold;
     height: 50px;
     font-size: 15px;
-    color: #333;
+    color: #212529;
 }
 
 tr {
@@ -357,6 +361,28 @@ tr {
     border-bottom: 2px solid #EEEEEE;
 }
 
+.button-box2 {
+    text-align: center;
+    margin-top: 40px;
+    margin-left: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.delete2 {
+    color: #0F2D6A;
+    border: 1px solid #0F2D6A;
+    margin-right: 8.5px;
+    padding-left: 38px;
+    padding-top: 15px;
+}
+
+.register2 {
+    background-color: #0F2D6A;
+    color: white;
+    padding-left: 38px;
+    padding-top: 15px;
+}
 
 /* ------------------------------------------ */
 
@@ -433,6 +459,8 @@ tr {
 #schoolTable {
     margin-top: 20px;
     margin-left: 28px;
+    overflow:auto;
+    height: 400px;
 }
 
 #schoolTable h2{
@@ -454,6 +482,28 @@ tr {
     border-right: none;
     border-bottom: 2px solid #EEEEEE;
     
+}
+
+.button-box3 {
+    margin-top: 40px;
+    margin-left: 90px;
+    display: flex;
+    align-items: center;
+}
+
+.delete3 {
+    color: #0F2D6A;
+    border: 1px solid #0F2D6A;
+    margin-right: 8.5px;
+    padding-left: 38px;
+    padding-top: 15px;
+}
+
+.register3 {
+    background-color: #0F2D6A;
+    color: white;
+    padding-left: 38px;
+    padding-top: 15px;
 }
 
 /* ------------------------------------------ */

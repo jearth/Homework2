@@ -212,7 +212,7 @@ $.ajax({
         var str = '';
         $.each(result, function(i, item) {
             var number = i + 1;
-            str += '<tr><td>' + result[i].schoolNo + '</td><td>' + result[i].schoolName + '</td></tr>';
+            str += '<tr><td>' + number + '</td><td>' + result[i].schoolName + '</td></tr>';
         });
         $('.schoolTable_body').append(str);
 
@@ -229,7 +229,7 @@ $.ajax({
             $(this).css('background-color', '#F9F9F9');
 
             // 선택된 학교의 식별코드 가져오기
-            selectedSchoolCode = $(this).find('td:eq(0)').text();
+            selectedSchoolCode = $(this).find('td:eq(1)').text();
         });
 
         // 등록하기 버튼 클릭 이벤트
@@ -346,7 +346,6 @@ function addRow1(button) {
         }
         return true;
     }
-
 
     // 새로운 행 추가 전에 유효성 검사
     if (validateRow(newRow)) {
@@ -568,24 +567,6 @@ document.querySelector('.button.register').addEventListener('click', function ()
     }
     
 });
-
-
-// 성공 팝업창 표시 함수
-// function openSuccessPopup(message) {
-//     document.getElementById('successMessage').textContent = message;
-//     document.getElementById('successPopup').style.display = 'block';
-// }
-
-// 에러 팝업창 표시 함수
-// function openErrorPopup(message) {
-//     document.getElementById('errorMessage').textContent = message;
-//     document.getElementById('errorPopup').style.display = 'block';
-// }
-
-// 팝업창 닫기 함수
-// function closePopup(popupId) {
-//     document.getElementById(popupId).style.display = 'none';
-// }
 
 // --------------------------------------------------
 

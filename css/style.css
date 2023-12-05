@@ -204,7 +204,6 @@
     color: rgb(0, 0, 0);
 }
 
-
 #container1 .search-box .input-box input{
     width: 220px;
     height: 36px;
@@ -232,30 +231,35 @@
     cursor: pointer;
 }
 
-
-
 /* 컨텐츠 박스2 */
 #container2 {
     margin-top: 16px;
     margin-left: 60px;
     width: 1280px;
-    height: 211px;
+    height: 590px;
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
     border-radius: 0.5em;
-    display: flex;
-    flex-direction: column;
 }
 
 #container2 h5{
     margin-top: 35px;
-    margin-left: 44px;
     font-weight: bold;
-    color: #212529;
+    color: #222222;
+    display: flex;
+}
+
+#container2 h5 p{
+    color: #222222;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-top: 3px;
 }
 
 #container2 .button-box {
     gap: 12px;
+    margin-left: 550px;
 }
 
 #container2 .button {
@@ -268,7 +272,7 @@
 }
 
 #container2 .button.register {
-    margin-left: 800px;
+    margin-left: 200px;
     width: 130px;
     height: 36px;
     font-size: 13px;
@@ -286,15 +290,131 @@
     color: #DD4B39;
 }
 
+.popup {
+    width: 400px;
+    height: 253px;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    border-radius: 0.5em;
+}
 
+#deletePopup h2 {
+    font-size: 25px;
+    color: #0F2D6A;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    font-weight: bold;
+}
+
+#deletePopup p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+.popup button.confirm {
+    margin-left: 130px;
+    margin-top: 20px;
+    width: 88px;
+    height: 43px;
+    background-color: #0F2D6A;
+    color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+    font-size: 15px;
+}
+
+/* 닫기 버튼 스타일 */
+.popup .close {
+    display: none;
+}
+
+/* ----------------------------------------- */
+th input[type="checkbox"] {
+    margin-right: 15px;
+}
+
+td input[type="checkbox"] {
+    margin-right: 35px;
+}
+
+.col {
+    display: flex;
+    justify-content: center;
+}
+
+.leaderTable {
+    width: 97%;
+    margin: 20px;
+}
+
+table {
+    font-size: 13px;
+    margin-left: 13px;
+    width: 98%;
+}
+
+th {
+    border-top: 2px solid #EEEEEE;
+    border-left: none;
+    border-right: none;
+    border-bottom: 2px solid #EEEEEE;
+    font-size: 15px;
+    padding: 8px;
+    text-align: center;
+}
+
+td{
+    font-weight: bold;
+    padding: 7px;
+    text-align: center;
+    border-bottom: 1px solid #EEEEEE;
+}
+
+thead {
+    background-color: #FBFBFB;
+}
+
+.leaderTable_body tr:hover {
+    cursor: pointer;
+    background-color: #FBFBFB;
+}
+
+.detailsBtn {
+    background-color: #F2F4F5;
+    color: #0F2D6A;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 0.5em;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.detailsBtn:hover {
+    background-color: #0F2D6A;
+    color: #ffffff;
+}
+
+/* ---------------------------------------- */
 
 /* 꼬리말 */
 #footer {
     background-color: #FBFBFB;
     color: #969696;
+    margin-left: 260px;
     padding: 10px;
     width: 86%;
     height: 30px;
-    bottom: 28px;
+    bottom: 10px;
     position: absolute;
 }

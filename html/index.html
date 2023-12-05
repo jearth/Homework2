@@ -60,9 +60,17 @@
                         <div class="col">
                             <div class="content-header">
                                 <h5>전체 지도자 목록
+                                    <p id="totalleader">총</p>
                                     <div class="button-box">
                                         <div class="button register" onClick="location.href='register.html'">지도자 등록하기</div>
                                         <div class="button delete">삭제하기</div>
+                                        <div id="deletePopup" class="popup">
+                                            <h2>지도자 삭제</h2>
+                                            <span class="close" onclick="closePopup('deletePopup')">&times;</span>
+                                            <p>지도자를 삭제하시겠습니까? </br>삭제된 지도자는 복구되지 않습니다.</p>
+                                            <button class="confirm">확인</button>
+                                        </div>
+                                    </div>  
                                     </div>
                                 </h5>
                             </div>
@@ -72,31 +80,22 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>번호</th>
-                                            <th>학교명</th>
+                                            <th><input type="checkbox" id="selectAll"/>번호</th>
+                                            <th>식별코드</th>
                                             <th>이름</th>
                                             <th>종목</th>
                                             <th>소속학교</th>
                                             <th>이력 정보 상세</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>홍길동</td>
-                                            <td>팀장</td>
-                                        </tr>
-                                    </tbody>
+                                    <tbody class="leaderTable_body"></tbody>
+                                    
                                 </table>
                             </div>
+                            
                         </div>    
                     </div>
-                
-                    
-                   
-                    
                 </div>
-
-
                 <div id="footer">
                     <small>&copy;2023 Copyright bt HEADIT All Rights Reserved.</small>
                 </div>

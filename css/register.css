@@ -370,7 +370,7 @@ tr {
 
 .button-box2 {
     margin-top: 40px;
-    margin-left: 90px;
+    margin-left: 105px;
     display: flex;
     align-items: center;
 }
@@ -531,7 +531,7 @@ tbody.schoolTable_body {
 
 .button-box3 {
     margin-top: 40px;
-    margin-left: 90px;
+    margin-left: 105px;
     display: flex;
     align-items: center;
 }
@@ -954,7 +954,6 @@ input[name="tel3"].custom-input {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     border-radius: 0.5em;
-
 }
 
 #cancelPopup h2 {

@@ -229,7 +229,7 @@
 /* 모달 스타일 */
 #container1  .modal {
     display: none; 
-    left: 600px;
+    left: 700px;
     width: 650px;
     height: 900px;
 }
@@ -314,7 +314,6 @@
 
 /* 지도자 테이블 스타일 */
 #leaderTable {
-    
     margin-top: 20px;
     margin-left: 28px;
     overflow:auto;
@@ -326,6 +325,15 @@
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
+    display: flex;
+}
+
+#leaderTable h2 p {
+    color: #0F2D6A;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-top: 3px;
 }
 
 #leaderTable th, #leaderTable td {
@@ -345,7 +353,6 @@ td:not(:first-child), th:not(:first-child) {
 
 tbody.leaderTable_body {
     font-weight: bold;
-    height: 50px;
     font-size: 15px;
     color: #212529;
 }
@@ -362,14 +369,13 @@ tr {
 }
 
 .button-box2 {
-    text-align: center;
     margin-top: 40px;
     margin-left: 90px;
     display: flex;
     align-items: center;
 }
 
-.delete2 {
+.button-box2 .delete2 {
     color: #0F2D6A;
     border: 1px solid #0F2D6A;
     margin-right: 8.5px;
@@ -377,13 +383,37 @@ tr {
     padding-top: 15px;
 }
 
-.register2 {
+.button-box2 .register2 {
     background-color: #0F2D6A;
     color: white;
     padding-left: 38px;
     padding-top: 15px;
 }
 
+#registerPopup1.popup h2 {
+    font-size: 25px;
+    color: #0F2D6A;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#registerPopup1 p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+#registerPopup1 button.confirm {
+    margin-left: 130px;
+    margin-top: 15px;
+    width: 88px;
+    height: 43px;
+    background-color: #0F2D6A;
+    color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+}
 /* ------------------------------------------ */
 
 #container1 #school-heading {
@@ -455,7 +485,7 @@ tr {
     color: #0F2D6A;
 }
 
-/* 지도자 테이블 스타일 */
+/* 학교 테이블 스타일 */
 #schoolTable {
     margin-top: 20px;
     margin-left: 28px;
@@ -468,6 +498,16 @@ tr {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
+    display: flex;
+
+}
+
+#schoolTable h2 p {
+    color: #0F2D6A;
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 8px;
+    margin-top: 3px;
 }
 
 #schoolTable th, #schoolTable td {
@@ -481,7 +521,12 @@ tr {
     border-left: none;
     border-right: none;
     border-bottom: 2px solid #EEEEEE;
-    
+}
+
+tbody.schoolTable_body {
+    font-weight: bold;
+    font-size: 15px;
+    color: #212529;
 }
 
 .button-box3 {
@@ -491,7 +536,7 @@ tr {
     align-items: center;
 }
 
-.delete3 {
+.button-box3 .delete3 {
     color: #0F2D6A;
     border: 1px solid #0F2D6A;
     margin-right: 8.5px;
@@ -499,13 +544,37 @@ tr {
     padding-top: 15px;
 }
 
-.register3 {
+.button-box3 .register3 {
     background-color: #0F2D6A;
     color: white;
     padding-left: 38px;
     padding-top: 15px;
 }
 
+#registerPopup2.popup h2 {
+    font-size: 25px;
+    color: #0F2D6A;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#registerPopup2 p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+#registerPopup2 button.confirm {
+    margin-left: 130px;
+    margin-top: 15px;
+    width: 88px;
+    height: 43px;
+    background-color: #0F2D6A;
+    color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+}
 /* ------------------------------------------ */
 
 #container1 #name-heading {
@@ -870,6 +939,7 @@ input[name="tel3"].custom-input {
 }
 
 /* --------------------------------------- */
+/* 취소하기 버튼 클릭 시 */
 .popup {
     width: 400px;
     height: 253px;
@@ -924,6 +994,67 @@ input[name="tel3"].custom-input {
 /* 닫기 버튼 스타일 */
 .popup .close {
     display: none;
+}
+
+/* 등록하기 버튼 클릭 시 유효값이 다 채워지지 않았을 때 */
+#registerPopup3.popup h2 {
+    font-size: 25px;
+    color: #0F2D6A;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#registerPopup3 p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+#registerPopup3 button.confirm {
+    margin-left: 130px;
+    margin-top: 15px;
+    width: 88px;
+    height: 43px;
+    background-color: #0F2D6A;
+    color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+}
+
+/* 등록하기 버튼 클릭 시 유효값이 다 채워졌을 때*/
+#registerPopup4.popup h2 {
+    font-size: 25px;
+    color: #0F2D6A;
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#registerPopup4 p {
+    font-size: 15px;
+    text-align: center;
+    margin-top: 35px;
+}
+
+#registerPopup4 button.confirm {
+    width: 88px;
+    height: 43px;
+    background-color: #0F2D6A;
+    color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+}
+
+#registerPopup4 button.cancel {
+    margin-left: 85px;
+    margin-top: 15px;
+    width: 88px;
+    height: 43px;
+    background-color: #ffffff;
+    color: #0F2D6A;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
 }
 
 /* ----------------------------------------- */

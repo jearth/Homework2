@@ -70,7 +70,9 @@
                                                     <button onclick="searchLeaderCode()">검색하기</button>
                                                 </div>
                                                 <div id="leaderTable">
-                                                    <h2>총 지도자</h2>
+                                                    <h2>총 지도자
+                                                        <p id="totalLeaders">총</p>
+                                                    </h2>
                                                     <table>
                                                         <thead>
                                                             <tr>
@@ -84,8 +86,14 @@
                                                     </table>
                                                 </div>
                                                 <div class="button-box2 ">
-                                                    <div class="button delete2">취소하기</div>
-                                                    <div class="button register2">등록하기</div>           
+                                                    <div class="button delete2" id="cancelleaders" >취소하기</div>
+                                                    <div class="button register2" id="registerleaders" >등록하기</div>
+                                                    <div id="registerPopup1" class="popup">
+                                                        <h2>선택된 식별코드 없음</h2>
+                                                        <span class="close" onclick="closePopup('registerPopup1')">&times;</span>
+                                                        <p>선택된 지도자 식별코드가 없습니다. </br>지도자 식별코드를 선택해주시기 바랍니다.</p>
+                                                        <button class="confirm">확인</button>
+                                                    </div>              
                                                 </div>                                                                    
                                             </div>
                                         </div>
@@ -110,7 +118,9 @@
                                                     <button onclick="searchSchoolCode()">검색하기</button>
                                                 </div>
                                                 <div id="schoolTable">
-                                                    <h2>총 학교</h2>
+                                                    <h2>총 학교
+                                                        <p id="totalSchool">총</p>
+                                                    </h2>
                                                     <table>
                                                         <thead>
                                                             <tr>
@@ -122,8 +132,14 @@
                                                     </table>
                                                 </div>
                                                 <div class="button-box3 ">
-                                                    <div class="button delete3">취소하기</div>
-                                                    <div class="button register3">등록하기</div>           
+                                                    <div class="button delete3" id="cancelSchool" onclick="closeModal2()">취소하기</div>
+                                                    <div class="button register3" id="registerSchool" onclick="closeModal2()">등록하기</div>
+                                                    <div id="registerPopup2" class="popup">
+                                                        <h2>선택된 학교 없음</h2>
+                                                        <span class="close" onclick="closePopup('registerPopup2')">&times;</span>
+                                                        <p>선택된 학교명이 없습니다. </br>학교명을 선택해주시기 바랍니다.</p>
+                                                        <button class="confirm">확인</button>
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </div>                                        
@@ -251,6 +267,19 @@
                                 <button class="confirm">확인</button>
                             </div>
                             <div class="button register">등록하기</div>
+                            <div id="registerPopup3" class="popup">
+                                <h2>필수입력값 확인</h2>
+                                <span class="close" onclick="closePopup('registerPopup3')">&times;</span>
+                                <p>필수입력값이 채워지지 않았습니다. </br>확인후 채워주시기 바랍니다.</p>
+                                <button class="confirm">확인</button>
+                            </div>
+                            <div id="registerPopup4" class="popup">
+                                <h2>지도자 등록</h2>
+                                <span class="close" onclick="closePopup('registerPopup3')">&times;</span>
+                                <p>입력한 내용으로 지도자를 등록하시겠습니까?</p>
+                                <button class="cancel">취소</button>
+                                <button class="confirm">확인</button>
+                            </div> 
                         </div>
                     </div>
                 </div>     

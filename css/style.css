@@ -407,6 +407,27 @@ thead {
 
 /* ---------------------------------------- */
 
+#pagination {
+    display: flex;
+    margin-top: 10px;
+}
+  
+#pagination span {
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
+}
+  
+#pagination span:hover {
+    background-color: #0F2D6A;
+    color: #ffffff;
+}
+
+
+  
+/* ---------------------------------------- */
+
 /* 꼬리말 */
 #footer {
     background-color: #FBFBFB;

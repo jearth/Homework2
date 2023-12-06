@@ -44,7 +44,7 @@ function searchLeaderCode() {
         url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
         type: "get",
         dataType: "json",
-        data: { name: inputText }, // name????이라는 키에 inputText라는 변수의 값을 할당
+        data: { name: inputText }, // name이라는 키에 inputText라는 변수의 값을 할당
         success: function(result) {
             var str = '';
 
@@ -256,7 +256,6 @@ $.ajax({
                 popup.style.display = 'none';
             });
         }
-        
     },
     error: function(xhr, status, error) {
         console.log("통신에러");

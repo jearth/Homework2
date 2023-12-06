@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <link href="../css/detail.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
   <body>
     <div id="wrap">
@@ -40,7 +42,7 @@
                                         <label for="file-input" id="image-placeholder">
                                           <div id="upload-button">사진 첨부하기</div>
                                         </label>
-                                        <input type="file" id="file-input" accept="image/*">
+                                        <input type="file" id="file-input" accept="image/*" id="selected-image">
                                         <img id="selected-image" alt="">
                                         <p>파일 크기는 MB 이하로 등록해주세요.</p>
                                     </div>
@@ -48,48 +50,47 @@
                                 <div class="col-sm-9 right-content">
                                     <div class="row custom-row">
                                         <div class="col-6 col-sm-6">
-                                            <h8 id="code-heading" class="custom-heading">식별코드
-                                                
+                                            <h8 id="code-heading" class="custom-heading">식별코드<hr class="section-hr2">
+                                                <p id="leaderNoResult"></p>
                                             </h8>
                                         </div>
-                                        
                                         <div class="col-6 col-sm-6">
-                                            <h8 id="school-heading" class="custom-heading">학교명
-                                                
+                                            <h8 id="school-heading" class="custom-heading">학교명<hr class="section-hr3">
+                                                <p id="schoolNoResult"></p>
                                             </h8>
-                                        </div>
-                                                                            
+                                        </div>                          
                                     </div>
                                     <div class="row custom-row">
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="name-heading" class="custom-heading">성명
-                                                
+                                            <h8 id="name-heading" class="custom-heading">성명<hr class="section-hr4">
+                                                <p id="leaderNameResult"></p>
                                             </h8>
                                         </div>
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="dob-heading" class="custom-heading">생년월일
-                                                
+                                            <h8 id="dob-heading" class="custom-heading">생년월일<hr class="section-hr5">
+                                                <p id="birthdayResult"></p>
                                             </h8>
                                         </div>
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="gender-heading" class="custom-heading">성별
-                                                
+                                            <h8 id="gender-heading" class="custom-heading">성별<hr class="section-hr6">
+                                                <p id="genderResult"></p>
                                             </h8>
                                         </div>
                                     </div>
                                     <div class="row custom-row">
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="sport-heading" class="custom-heading">종목
-                                                
+                                            <h8 id="sport-heading" class="custom-heading">종목<hr class="section-hr7">
+                                                <p id="sportNameResult"></p>
                                             </h8>
                                         </div>
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="phone-heading" class="custom-heading">근무지 전화번호</h8>
-                                            
+                                            <h8 id="phone-heading" class="custom-heading">근무지 전화번호<hr class="section-hr8">
+                                                <p id="telNoResult"></p>
+                                            </h8>
                                         </div>
                                         <div class="col-4 col-sm-4">
-                                            <h8 id="hire-date-heading" class="custom-heading">최초채용
-                                                
+                                            <h8 id="hire-date-heading" class="custom-heading">최초채용<hr class="section-hr9">
+                                                <p id="empDTResult"></p>
                                             </h8>
                                         </div>
                                     </div>
@@ -105,7 +106,7 @@
                                     <th>근무종료일</th>
                                     <th>종목</th>
                                 </tr>
-                                                       
+                                <tbody class="historyTable_body"></tbody>         
                             </table>
                         </h4>
                         <h4 class="section-heading3">3. 자격사항<span class="required-field">필수입력값 항목입니다.</span><hr class="section-hr">
@@ -116,7 +117,7 @@
                                     <th>취득일자</th>
                                     <th>발급기관</th>
                                 </tr>
-                                                            
+                                <tbody class="certificateTable_body"></tbody>                
                             </table>
                         </h4>
                         <div class="button-box">
@@ -133,7 +134,7 @@
         
     </div>
 
-
+    <script src="../JS/detail.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.min.js" integrity="sha384-Rx+T1VzGupg4BHQYs2gCW9It+akI2MM/mndMCy36UVfodzcJcF0GGLxZIzObiEfa" crossorigin="anonymous"></script>

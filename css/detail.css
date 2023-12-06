@@ -138,18 +138,14 @@
     height: 300px;
 }
   
-#container1 #image-placeholder {
+#container1 #imageResult {
     margin-top: 5px;
     margin-left: 35px;
     width: 243px;
     height: 315px;
-    background-color: #ccc;
     top: 0;
     left: 10;
-    cursor: pointer;
     border-radius: 0.5em;
-    background-color: #F2F4F5;
-    border: 2px solid #dad9d9;
 }
 
 #container1 #upload-button {
@@ -350,6 +346,15 @@
     font-weight: bold;
     padding: 14px;
     text-align: center;
+}
+
+/* ----------------------------------------------------- */
+td{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: center;
+    font-size: 15px;
+    border-bottom: 1px solid #EEEEEE;
 }
 
 /* ----------------------------------------------------- */

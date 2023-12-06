@@ -12,23 +12,26 @@ function loadLeaderDetails(leaderNo) {
         method: 'GET',
         dataType: 'json',
         success: function (result) {
-            console.log(result)
-            var str = '';
-            $.each(result, function (i) {
-                str += '<tr><td>' + result[i].startDT + '</td><td>' + result[i].endDT + '</td><td>' + result[i].schoolName + '</td><td>' + result[i].sportName + '</td></tr>';
-            });
-            $('.historyTable_body').append(str);
+            console.log(result);
 
-            $.each(result, function (i) {
-                str += '<tr><td>' + result[i].certificateName + '</td><td>' + result[i].certificateNumber + '</td><td>' + result[i].certificateDT + '</td><td>' + result[i].organization + '</td></tr>';
+            // 근무 이력 테이블
+            var historyStr = '';
+            $.each(result.history, function (i, val) {
+                console.log('i:', i, 'val:', val);
+                historyStr += '<tr><td>' + val.startDT + '</td><td>' + val.endDT + '</td><td>' + val.schoolName + '</td><td>' + val.sportName + '</td></tr>';
             });
-            $('.certificateTable_body').append(str);
+            $('.historyTable_body').append(historyStr);
 
-            // 성공적으로 데이터를 받아오면 실행되는 함수
+            // 자격사항 테이블
+            var certificateStr = '';
+            $.each(result.certificate, function (i, val) {
+                console.log('i:', i, 'val:', val);
+                certificateStr += '<tr><td>' + val.certificateName + '</td><td>' + val.certificateNumber + '</td><td>' + val.certificateDT + '</td><td>' + val.organization + '</td></tr>';
+            });
+            $('.certificateTable_body').append(certificateStr);
+
             displayData(result);
 
-            // 이미지를 표시하는 함수 호출
-            displayImage(result.leaderImg);
         },
         error: function (error) {
             console.error('데이터를 가져오는 중 오류 발생:', error);
@@ -38,6 +41,10 @@ function loadLeaderDetails(leaderNo) {
 
 // 받아온 데이터를 화면에 표시하는 함수
 function displayData(data) {
+
+    <img src="data:leaderImg/png;base64, QWE.." alt="image A" />
+
+    // 다른 데이터 표시
     $('#leaderNoResult').text(data.leaderNo);
     $('#schoolNoResult').text(data.schoolNo);
     $('#leaderNameResult').text(data.leaderName);
@@ -46,10 +53,4 @@ function displayData(data) {
     $('#sportNameResult').text(data.sportName);
     $('#telNoResult').text(data.telNo);
     $('#empDTResult').text(data.empDT);
-}
-
-// 이미지를 표시하는 함수
-function displayImage(leaderImg) {
-    // 이미지 데이터를 데이터 URI로 변환하여 img 태그의 src에 지정
-    $('#imageResult').attr('src', 'data:image/jpeg;base64,' + leaderImg);
 }

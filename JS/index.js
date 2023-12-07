@@ -168,6 +168,11 @@ function updatePagination() {
         goToPage(2);
     });
 
+    //  페이지로 이동
+    $('#thirdPage').click(function () {
+        goToPage(3);
+    });
+
     // 첫 페이지로 이동
     $('#firstPage').off('click').on('click', function () {
         goToPage(1);
@@ -175,7 +180,7 @@ function updatePagination() {
 
     // 마지막 페이지로 이동
     $('#lastPage').off('click').on('click', function () {
-        goToPage(2);
+        goToPage(3);
     });
 }
 
@@ -214,7 +219,7 @@ function loadTableData() {
             }
             $('.leaderTable_body').html(str);
 
-            var totalLeaders = result.length -1 ;
+            var totalLeaders = result.length ;
             $('#totalleader').text('총 ' + totalLeaders + '명');
 
             updatePagination();

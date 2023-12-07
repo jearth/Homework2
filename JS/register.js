@@ -265,65 +265,94 @@ $.ajax({
 
 // -------------------------------------
 
+// 파일 입력의 변화를 감지하는 이벤트 리스너
 document.getElementById("file-input").addEventListener("change", function () {
+
+    // 파일 입력
     const fileInput = this;
+
+    // 이미지를 표시할 엘리먼트와 선택된 이미지를 표시할 엘리먼트를 가져오기
     const imagePlaceholder = document.getElementById("image-placeholder");
     const selectedImage = document.getElementById("selected-image");
 
+    // 만약 파일 입력에 파일이 선택되었다면
     if (fileInput.files && fileInput.files[0]) {
+
+        // FileReader 객체를 생성하기
         const reader = new FileReader();
 
+        // 파일 읽기 작업이 완료되면 실행됨
         reader.onload = function (e) {
-        selectedImage.src = e.target.result;
-        selectedImage.style.display = "block";
-        imagePlaceholder.style.display = "none";
+            // 선택된 이미지 엘리먼트의 src 속성을 읽어온 데이터 URL로 설정함
+            selectedImage.src = e.target.result;
+            
+            // 선택된 이미지를 표시하고 이미지 플레이스홀더를 감춤
+            selectedImage.style.display = "block";
+            imagePlaceholder.style.display = "none";
         };
 
+        // 파일을 Data URL로 변환하여 읽어옴......
         reader.readAsDataURL(fileInput.files[0]);
     }
 });
 
+
 // ---------------------------------------------------------
 
+// HTML에서 클래스가 "select"인 모든 요소를 선택하여 document.querySelectorAll에 저장
 const selectBoxElements = document.querySelectorAll(".select");
 
-function toggleSelectBox(selectBox) {
+    // 선택 상자 함수
+    function toggleSelectBox(selectBox) {
     selectBox.classList.toggle("active");
-}
+    }
 
-function selectOption(optionElement) {
+    // 옵션 선택 함수
+    function selectOption(optionElement) {
+    
+    // 선택한 옵션이 속한... 선택 상자를 찾고
     const selectBox = optionElement.closest(".select");
-    const selectedElement = selectBox.querySelector(".selected-value");
-    selectedElement.textContent = optionElement.textContent;
-}
 
-selectBoxElements.forEach(selectBoxElement => {
+    // 그리고 선택 상자 내부에서 현재 선택된 항목을 나타내는 요소 찾고
+    const selectedElement = selectBox.querySelector(".selected-value");
+
+    // 선택한 옵션의 텍스트 내용을 현재 선택된 항목에 표시하고
+    selectedElement.textContent = optionElement.textContent;
+    }
+
+    // 각 선택 상자에 대한 이벤트 리스너
+    selectBoxElements.forEach(selectBoxElement => {
     selectBoxElement.addEventListener("click", function (e) {
         const targetElement = e.target;
         const isOptionElement = targetElement.classList.contains("option");
 
+        // 클릭된 요소가 옵션인 경우 해당 옵션 선택 함수 호출, 그렇지 않으면 선택 상자 토글
         if (isOptionElement) {
         selectOption(targetElement);
         }
 
         toggleSelectBox(selectBoxElement);
     });
-});
+    });
 
-document.addEventListener("click", function (e) {
+    // 문서 어느 곳이든 클릭할 때 발생하는 이벤트 리스너
+    document.addEventListener("click", function (e) {
     const targetElement = e.target;
+
+    // 클릭된 요소가 선택 상자인지 또는 선택 상자의 하위 요소인지 확인
     const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
 
     if (isSelect) {
         return;
     }
-
+    
+    // 클릭된 요소가 선택 상자 또는 선택 상자의 하위 요소가 아닌 경우 모든 선택 상자 비활성화
     const allSelectBoxElements = document.querySelectorAll(".select");
 
     allSelectBoxElements.forEach(boxElement => {
         boxElement.classList.remove("active");
     });
-}); 
+});
 
 // --------------------------------------
 

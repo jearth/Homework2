@@ -1,20 +1,31 @@
+// HTML에서 클래스가 "select"인 모든 요소를 선택하여 document.querySelectorAll에 저장
 const selectBoxElements = document.querySelectorAll(".select");
 
+    // 선택 상자 함수
     function toggleSelectBox(selectBox) {
     selectBox.classList.toggle("active");
     }
 
+    // 옵션 선택 함수
     function selectOption(optionElement) {
+    
+    // 선택한 옵션이 속한... 선택 상자를 찾고
     const selectBox = optionElement.closest(".select");
+
+    // 그리고 선택 상자 내부에서 현재 선택된 항목을 나타내는 요소 찾고
     const selectedElement = selectBox.querySelector(".selected-value");
+
+    // 선택한 옵션의 텍스트 내용을 현재 선택된 항목에 표시하고
     selectedElement.textContent = optionElement.textContent;
     }
 
+    // 각 선택 상자에 대한 이벤트 리스너
     selectBoxElements.forEach(selectBoxElement => {
     selectBoxElement.addEventListener("click", function (e) {
         const targetElement = e.target;
         const isOptionElement = targetElement.classList.contains("option");
 
+        // 클릭된 요소가 옵션인 경우 해당 옵션 선택 함수 호출, 그렇지 않으면 선택 상자 토글
         if (isOptionElement) {
         selectOption(targetElement);
         }
@@ -23,14 +34,18 @@ const selectBoxElements = document.querySelectorAll(".select");
     });
     });
 
+    // 문서 어느 곳이든 클릭할 때 발생하는 이벤트 리스너
     document.addEventListener("click", function (e) {
     const targetElement = e.target;
+
+    // 클릭된 요소가 선택 상자인지 또는 선택 상자의 하위 요소인지 확인
     const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
 
     if (isSelect) {
         return;
     }
-
+    
+    // 클릭된 요소가 선택 상자 또는 선택 상자의 하위 요소가 아닌 경우 모든 선택 상자 비활성화
     const allSelectBoxElements = document.querySelectorAll(".select");
 
     allSelectBoxElements.forEach(boxElement => {
@@ -72,7 +87,7 @@ function searchLeaderCode() {
                 $('.leaderTable_body').html('<tr><td colspan="6">검색된 결과가 없습니다.</td></tr>');
             }
 
-            // 클릭 이벤트
+            // 클릭
             $('.leaderTable_body tr').on('click', function () {
                 $('.leaderTable_body tr').css('background-color', '');
                 $(this).css('background-color', '#F9F9F9');
@@ -218,7 +233,7 @@ function openDeletePopup(checkedItems) {
     });
 }
 
-// 페이지 로딩 시 실행되는 코드 (index.js)
+// 페이지 로딩 시 실행되는 코드
 $(document).ready(function () {
 
     // 클릭 이벤트

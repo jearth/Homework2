@@ -17,7 +17,7 @@ function loadLeaderDetails(leaderNo) {
             // 근무 이력 테이블
             var historyStr = '';
             $.each(result.history, function (i, val) {
-                console.log('i:', i, 'val:', val);
+                // console.log('i:', i, 'val:', val);
                 historyStr += '<tr><td>' + val.startDT + '</td><td>' + val.endDT + '</td><td>' + val.schoolName + '</td><td>' + val.sportName + '</td></tr>';
             });
             $('.historyTable_body').append(historyStr);
@@ -25,7 +25,7 @@ function loadLeaderDetails(leaderNo) {
             // 자격사항 테이블
             var certificateStr = '';
             $.each(result.certificate, function (i, val) {
-                console.log('i:', i, 'val:', val);
+                // console.log('i:', i, 'val:', val);
                 certificateStr += '<tr><td>' + val.certificateName + '</td><td>' + val.certificateNumber + '</td><td>' + val.certificateDT + '</td><td>' + val.organization + '</td></tr>';
             });
             $('.certificateTable_body').append(certificateStr);

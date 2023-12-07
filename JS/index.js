@@ -44,7 +44,7 @@ const selectBoxElements = document.querySelectorAll(".select");
     if (isSelect) {
         return;
     }
-    
+
     // 클릭된 요소가 선택 상자 또는 선택 상자의 하위 요소가 아닌 경우 모든 선택 상자 비활성화
     const allSelectBoxElements = document.querySelectorAll(".select");
 
@@ -105,48 +105,85 @@ function searchLeaderCode() {
 var pageSize = 8; // 페이지당 표시되는 아이템 수
 var currentPage = 1; // 현재 페이지
 
-// 테이블 초기 로딩
+// 페이지를 로딩하고 초기 데이터를 표시하는 함수
 loadTableData();
 
-// 이전 페이지로 이동
+// 전체 아이템 수를 계산하는 함수
+function getTotalItems() {
+    return $('.leaderTable_body tr').length;
+}
+
+// 이전 페이지 버튼에 대한 클릭 이벤트
 $('#prevPage').click(function () {
+
+    // 현재 페이지가 1보다 큰 경우에만 이전 페이지로 이동함
     if (currentPage > 1) {
         goToPage(currentPage - 1);
     }
 });
 
-// 다음 페이지로 이동
+// 다음 페이지 버튼에 대한 클릭 이벤트
 $('#nextPage').click(function () {
+
+    // 전체 아이템 수와 페이지당 표시 아이템 수를 이용하여 전체 페이지 수 계산
     var totalItems = getTotalItems();
     var totalPages = Math.ceil(totalItems / pageSize);
 
-    if (currentPage < totalPages) {
+    // 현재 페이지가 전체 페이지 수보다 작은 경우에만 다음 페이지로 이동
+    if (currentPage < pageSize) {
         goToPage(currentPage + 1);
     }
 });
 
+
+
 // 페이지네이션 업데이트 함수
 function updatePagination() {
+
+    // 정체 아이템 수와 페이지당 표시 아이템 수를 이용하여 전체 페이지 수를 계산
     var totalItems = getTotalItems();
     var totalPages = Math.ceil(totalItems / pageSize);
 
-    $('#currentPage').text(currentPage);
-
+    // 현재 페이지가 1인 경우 이전 페이지 버튼 비활성화
     if (currentPage === 1) {
         $('#prevPage').prop('disabled', true);
     } else {
         $('#prevPage').prop('disabled', false);
     }
 
+    // 현재 페이지가 전체 페이지 수와 동일한 경우 다음 페이지 버튼 비활성화
     if (currentPage === totalPages) {
         $('#nextPage').prop('disabled', true);
     } else {
         $('#nextPage').prop('disabled', false);
     }
+
+    // 현재 페이지로 이동
+    $('#currentPage').click(function () {
+        goToPage(1);
+    });
+
+    // 다음 페이지로 이동
+    $('#secondPage').click(function () {
+        goToPage(2);
+    });
+
+    // 첫 페이지로 이동
+    $('#firstPage').off('click').on('click', function () {
+        goToPage(1);
+    });
+
+    // 마지막 페이지로 이동
+    $('#lastPage').off('click').on('click', function () {
+        goToPage(2);
+    });
 }
+
 
 // 페이지 이동 함수
 function goToPage(page) {
+
+    // 현재 페이지를 변경하고, 변경된 페이지에 해당하는 데이터를 로딩함
     currentPage = page;
     loadTableData();
 }
@@ -165,6 +202,8 @@ function loadTableData() {
         dataType: "json",
         data: data,
         success: function (result) {
+            console.log(result);
+
             var str = '';
             var startIndex = (currentPage - 1) * pageSize;
             var endIndex = Math.min(startIndex + pageSize, result.length);
@@ -175,7 +214,7 @@ function loadTableData() {
             }
             $('.leaderTable_body').html(str);
 
-            var totalLeaders = result.length;
+            var totalLeaders = result.length -1 ;
             $('#totalleader').text('총 ' + totalLeaders + '명');
 
             updatePagination();
@@ -197,10 +236,6 @@ function loadTableData() {
     });
 }
 
-// 전체 아이템 수를 계산하는 함수
-function getTotalItems() {
-    return $('.leaderTable_body tr').length - 1;
-}
 
 // 삭제하기 버튼 클릭 시 팝업 창 표시
 $('.button.delete').click(function () {

@@ -41,10 +41,16 @@ function loadLeaderDetails(leaderNo) {
 
 // 받아온 데이터를 화면에 표시하는 함수
 function displayData(data) {
+    console.log(`data: ${typeof data}`);
+    console.log(`data: ${JSON.stringify(data)}`);
 
-    <img src="data:leaderImg/png;base64, QWE.." alt="image A" />
+    // 이미지 태그
+    var imageTag = '<img src="data:image/png;base64,' + data.leaderImg + '" alt="image A" />';
+
+    console.log(imageTag);
 
     // 다른 데이터 표시
+    $('#imageResult').html(imageTag);
     $('#leaderNoResult').text(data.leaderNo);
     $('#schoolNoResult').text(data.schoolNo);
     $('#leaderNameResult').text(data.leaderName);

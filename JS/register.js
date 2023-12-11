@@ -89,7 +89,7 @@ $.ajax({
         var totalLeaders = result.length;
         $('#totalLeaders').text('총 ' + totalLeaders + '명');
 
-        // 선택된 학교의 식별코드
+        // 선택된 리더의 식별코드
         var selectedLeaderCode = null;
 
         // 클릭 이벤트
@@ -97,7 +97,7 @@ $.ajax({
             $('.leaderTable_body tr').css('background-color', '');
             $(this).css('background-color', '#F9F9F9');
 
-            // 선택된 학교의 식별코드 가져오기
+            // 선택된 리더의 식별코드 가져오기
             selectedLeaderCode = $(this).find('td:eq(2)').text();
         });
 

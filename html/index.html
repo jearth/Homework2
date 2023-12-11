@@ -57,52 +57,49 @@
                 
                 <div class="container" id="container2">
                     <div class="row row-cols-1">
-                        <div class="col">
-                            <div class="content-header">
-                                <h5>전체 지도자 목록
-                                    <p id="totalleader">총</p>
-                                    <div class="button-box">
-                                        <div class="button register" onClick="location.href='register.html'">지도자 등록하기</div>
-                                        <div class="button delete">삭제하기</div>
-                                        <div id="deletePopup" class="popup">
-                                            <h2>지도자 삭제</h2>
-                                            <span class="close" onclick="closePopup('deletePopup')">&times;</span>
-                                            <p>지도자를 삭제하시겠습니까? </br>삭제된 지도자는 복구되지 않습니다.</p>
-                                            <button class="confirm">확인</button>
-                                        </div>
-                                    </div>  
+                        <div class="content-header">
+                            <h5>전체 지도자 목록
+                                <p id="totalleader">총</p>
+                            </h5>
+                            <div class="button-box">
+                                <div class="button register" onClick="location.href='register.html'">지도자 등록하기</div>
+                                <div class="button delete">삭제하기</div>
+                                <div id="deletePopup" class="popup">
+                                    <h2>지도자 삭제</h2>
+                                    <span class="close" onclick="closePopup('deletePopup')">&times;</span>
+                                    <p>지도자를 삭제하시겠습니까? </br>삭제된 지도자는 복구되지 않습니다.</p>
+                                    <div class="popup-button-box">
+                                        <button class="confirm">확인</button>
+                                        <button class="register" onclick="close-popup">취소</button>
                                     </div>
-                                </h5>
-                            </div>
+                                </div>
+                            </div>   
+                        </div>
+                        <div class="leaderTable">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" id="selectAll"/>번호</th>
+                                        <th>식별코드</th>
+                                        <th>이름</th>
+                                        <th>종목</th>
+                                        <th>소속학교</th>
+                                        <th>이력 정보 상세</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="leaderTable_body"></tbody>
+                            </table>
                         </div>
                         <div class="col">
-                            <div class="leaderTable">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th><input type="checkbox" id="selectAll"/>번호</th>
-                                            <th>식별코드</th>
-                                            <th>이름</th>
-                                            <th>종목</th>
-                                            <th>소속학교</th>
-                                            <th>이력 정보 상세</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="leaderTable_body"></tbody>
-                                </table>
+                            <div class="pagination-container">
+                                <span id="firstPage" class="pagination-item">&laquo;</span>
+                                <span id="prevPage" class="pagination-item">&lsaquo;</span>
+                                <span id="currentPage" class="pagination-item">1</span>
+                                <span id="secondPage" class="pagination-item">2</span>
+                                <span id="nextPage" class="pagination-item">&rsaquo;</span>
+                                <span id="lastPage" class="pagination-item">&raquo;</span>
                             </div>
-                        </div>
-                        <div class="col">
-                            <div id="pagination">
-                                <span id="firstPage">&laquo;</span>
-                                <span id="prevPage">&lsaquo;</span>
-                                <span id="currentPage">1</span>
-                                <span id="secondPage">2</span>
-                                <span id="thirdPage">3</span>
-                                <span id="nextPage">&rsaquo;</span>
-                                <span id="lastPage">&raquo;</span>
-                            </div>
-                        </div>   
+                        </div>                        
                     </div>
                 </div>
                 <div id="footer">

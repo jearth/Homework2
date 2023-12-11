@@ -49,14 +49,23 @@ function displayData(data) {
 
     console.log(imageTag);
 
+    var birthday = new Date(data.birthday);
+    var empDT = new Date(data.empDT);
+
+    // 원하는 형식으로 가공하기
+    var formattedbirthday = birthday.getFullYear() + '.' + (birthday.getMonth() + 1) + '.' + birthday.getDate();
+    var formattedempDT = empDT.getFullYear() + '.' + (empDT.getMonth() + 1) + '.' + empDT.getDate();
+
     // 다른 데이터 표시
     $('#imageResult').html(imageTag);
     $('#leaderNoResult').text(data.leaderNo);
     $('#schoolNoResult').text(data.schoolNo);
     $('#leaderNameResult').text(data.leaderName);
-    $('#birthdayResult').text(data.birthday);
+    $('#birthdayResult').text(formattedbirthday);
     $('#genderResult').text(data.gender);
     $('#sportNameResult').text(data.sportName);
     $('#telNoResult').text(data.telNo);
-    $('#empDTResult').text(data.empDT);
+    $('#empDTResult').text(formattedempDT);
+
+
 }

@@ -55,7 +55,6 @@ const selectBoxElements = document.querySelectorAll(".select");
 
 // -------------------------------------------------------------------------------------------
 
-// 모달 검색 기능
 function searchLeaderCode() {
     var inputText = $('#searchInput').val();
     var searchType = $('.select .selected-value').text();
@@ -69,16 +68,20 @@ function searchLeaderCode() {
             type: searchType
         },
         success: function (result) {
+            // 필터링된 결과
+            var filteredResult = result.filter(function (item) {
+                return (
+                    (searchType === '전체' && (item.leaderName.includes(inputText) || item.sportName.includes(inputText))) ||
+                    (searchType === '이름' && item.leaderName.includes(inputText)) ||
+                    (searchType === '종목' && item.sportName.includes(inputText))
+                );
+            });
+
             var str = '';
 
-            $.each(result, function (i, item) {
+            $.each(filteredResult, function (i, item) {
                 var number = i + 1;
-                if (
-                    (searchType === '이름' && result[i].leaderName === inputText) ||
-                    (searchType === '종목' && result[i].sportName === inputText)
-                ) {
-                    str += '<tr><td><input type="checkbox" class="checkbox">' + number + '</td><td>' + result[i].leaderNo + '</td><td>' + result[i].leaderName + '</td><td>' + result[i].sportName + '</td><td>' + result[i].schoolName + '</td><td><button class="detailsBtn">상세보기</button></td></tr>';
-                }
+                str += '<tr><td><input type="checkbox" class="checkbox">' + number + '</td><td>' + item.leaderNo + '</td><td>' + item.leaderName + '</td><td>' + item.sportName + '</td><td>' + item.schoolName + '</td><td><button class="detailsBtn">상세보기</button></td></tr>';
             });
 
             if (str !== '') {
@@ -99,10 +102,11 @@ function searchLeaderCode() {
     });
 }
 
+
 // -------------------------------------------------------------------------------------------
 
 // 페이지네이션
-var pageSize = 8; // 페이지당 표시되는 아이템 수
+var pageSize = 10; // 페이지당 표시되는 아이템 수
 var currentPage = 1; // 현재 페이지
 
 // 페이지를 로딩하고 초기 데이터를 표시하는 함수
@@ -168,11 +172,6 @@ function updatePagination() {
         goToPage(2);
     });
 
-    //  페이지로 이동
-    $('#thirdPage').click(function () {
-        goToPage(3);
-    });
-
     // 첫 페이지로 이동
     $('#firstPage').off('click').on('click', function () {
         goToPage(1);
@@ -180,7 +179,7 @@ function updatePagination() {
 
     // 마지막 페이지로 이동
     $('#lastPage').off('click').on('click', function () {
-        goToPage(3);
+        goToPage(2);
     });
 }
 
@@ -271,7 +270,13 @@ function openDeletePopup(checkedItems) {
         // 팝업 닫기
         popup.style.display = 'none';
     });
+
+    $('#deletePopup .popup-button-box .register').on('click', function () {
+        // 팝업창 닫기
+        $('#deletePopup').hide();
+    });
 }
+
 
 // 페이지 로딩 시 실행되는 코드
 $(document).ready(function () {

@@ -159,7 +159,7 @@
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 30%;
+    top: 29%;
     display: none;
     box-sizing: border-box;
 }
@@ -236,10 +236,16 @@
     margin-top: 16px;
     margin-left: 60px;
     width: 1280px;
-    height: 590px;
+    height: 680px;
     border: 2px solid #EEEEEE;
     background-color: #ffffff;
     border-radius: 0.5em;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #container2 h5{
@@ -247,6 +253,7 @@
     font-weight: bold;
     color: #222222;
     display: flex;
+    margin-left: 30px;
 }
 
 #container2 h5 p{
@@ -259,7 +266,8 @@
 
 #container2 .button-box {
     gap: 12px;
-    margin-left: 550px;
+    margin-right: 30px;
+    padding-top: 20px;
 }
 
 #container2 .button {
@@ -272,7 +280,6 @@
 }
 
 #container2 .button.register {
-    margin-left: 200px;
     width: 130px;
     height: 36px;
     font-size: 13px;
@@ -321,13 +328,29 @@
     margin-top: 35px;
 }
 
+.popup-button-box{
+    display: flex;
+}
+
 .popup button.confirm {
-    margin-left: 130px;
+    margin-left: 85px;
     margin-top: 20px;
     width: 88px;
     height: 43px;
     background-color: #0F2D6A;
     color: #ffffff;
+    border: 2px solid #0F2D6A;
+    border-radius: 0.5em;
+    font-size: 15px;
+}
+
+.popup button.register{
+    margin-left: 10px;
+    margin-top: 20px;
+    width: 88px;
+    height: 43px;
+    background-color: #ffffff;
+    color: #0F2D6A;
     border: 2px solid #0F2D6A;
     border-radius: 0.5em;
     font-size: 15px;
@@ -407,35 +430,35 @@ thead {
 
 /* ---------------------------------------- */
 
-#pagination {
+.col .pagination-container {
     display: flex;
-    margin-top: 10px;
+    align-items: center;
 }
-  
-#pagination span {
-    padding: 5px 10px;
+
+
+.col .pagination-container .pagination-item {
     cursor: pointer;
-    font-size: 15px;
+    margin-right: 5px;
+    padding: 5px 5px;
+    cursor: pointer;
+    font-size: 17px;
     font-weight: bold;
 }
-  
-#pagination span:hover {
+ 
+.col .pagination-container .pagination-item:hover {
     background-color: #0F2D6A;
     color: #ffffff;
 }
 
-
-  
 /* ---------------------------------------- */
 
 /* 꼬리말 */
 #footer {
     background-color: #FBFBFB;
     color: #969696;
-    margin-left: 260px;
+    margin-left: 55px;
     padding: 10px;
     width: 86%;
     height: 30px;
     bottom: 10px;
-    position: absolute;
 }

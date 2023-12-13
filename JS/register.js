@@ -31,47 +31,10 @@ closeBtn.onclick = function() {
     modal.style.display = 'none';
 };
 
-// 취소 버튼 클릭 시 모달 닫기
+// 취소하기 버튼 클릭 시 모달 닫기
 cancelleaders.onclick = function() {
     modal.style.display = 'none';
 };
-
-
-// 모달 검색 기능
-function searchLeaderCode() {
-    var inputText = $('#leaderCodeInput').val(); // #leaderCodeInput ID를 가진 입력란에서 값을 가져와 inputText 변수에 저장
-    $.ajax({
-        url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
-        type: "get",
-        dataType: "json",
-        data: { name: inputText }, // name이라는 키에 inputText라는 변수의 값을 할당
-        success: function(result) {
-            var str = '';
-
-            $.each(result, function(i, item) {
-                if (item.leaderName === inputText) {
-                    var number = i + 1;
-                    str += '<tr><td>' + number + '</td><td>' + item.leaderName + '</td><td>' + item.leaderNO + '</td></tr>';
-                }
-            });
-
-            if (str !== '') {
-                $('.leaderTable_body').html(str); // 선택된 요소의 내용을 지정된 문자열 str로 설정
-            } else {
-                $('.leaderTable_body').html('<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>');
-            }
-
-            // 클릭 이벤트
-            $('.leaderTable_body tr').on('click', function() {
-                $('.leaderTable_body tr').css('background-color', '');
-                $(this).css('background-color', '#F9F9F9'); 
-            });
-        },
-        error: function(xhr, status, error) {
-            console.log("통신에러");
-        }
-    });
-}
 
 $.ajax({
     url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
@@ -98,6 +61,7 @@ $.ajax({
             $(this).css('background-color', '#F9F9F9');
 
             // 선택된 리더의 식별코드 가져오기
+            selectedLeaderName = $(this).find('td:eq(1)').text();
             selectedLeaderCode = $(this).find('td:eq(2)').text();
         });
 
@@ -106,6 +70,7 @@ $.ajax({
             if (selectedLeaderCode) {
                 // 가져온 식별코드를 입력란에 넣기
                 $('#code-heading input').val(selectedLeaderCode);
+                $('#name-heading input').val(selectedLeaderName);
                 modal.style.display = 'none';
             } else {
                 openregisterPopup1();
@@ -130,6 +95,70 @@ $.ajax({
         console.log("통신에러");
     }
 });
+
+
+// 모달 검색 기능
+function searchLeaderCode() {
+    var inputText = $('#leaderCodeInput').val(); // #leaderCodeInput ID를 가진 입력란에서 값을 가져와 inputText 변수에 저장
+
+    $.ajax({
+        url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
+        type: "get",
+        dataType: "json",
+        data: { keyword: inputText }, // keyword이라는 키에 inputText라는 변수의 값을 할당
+        success: function(result) {
+
+            // 필터링된 결과
+            var LeaderfilteredResult = result.filter(function (item) {
+                return item.leaderName.includes(inputText);
+            });
+
+            var str = '';
+
+            $.each(LeaderfilteredResult, function(i, item) {
+                var number = i + 1;
+                str += '<tr><td>' + number + '</td><td>' + item.leaderName + '</td><td>' + item.leaderNO + '</td></tr>';
+            });
+
+            if (str !== '') {
+                $('.leaderTable_body').html(str); // 선택된 요소의 내용을 지정된 문자열 str로 설정
+            } else {
+                $('.leaderTable_body').html('<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>');
+            }
+
+            // 업데이트된 지도자 수
+            var totalLeaders = LeaderfilteredResult.length;
+            $('#totalLeaders').text('총 ' + totalLeaders + '명');
+
+            // 클릭 이벤트
+            $('.leaderTable_body tr').on('click', function() {
+                $('.leaderTable_body tr').css('background-color', '');
+                $(this).css('background-color', '#F9F9F9');
+
+                 // 선택된 리더의 식별코드, 이름 가져오기
+                selectedLeaderCode = $(this).find('td:eq(2)').text(); 
+                selectedLeaderName = $(this).find('td:eq(1)').text();  
+            });
+
+            // 등록하기 버튼 클릭 이벤트
+            $('#registerleaders').on('click', function() {
+                if (selectedLeaderCode) {
+                    // 가져온 식별코드를 입력란에 넣기
+                    $('#code-heading input').val(selectedLeaderCode);
+                    $('#name-heading input').val(selectedLeaderName);
+
+                    modal.style.display = 'none';
+                } else {
+                    openregisterPopup1();
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.log("통신에러");
+        }
+    });
+}
+
 
 // -------------------------------------------------
 
@@ -161,7 +190,7 @@ cancelSchool.onclick = function() {
 function searchSchoolCode() {
     var schoolCode = document.getElementById('schoolCodeInput').value;
     if (schoolCode.trim() !== '') {
-        alert('검색 로직을 수행합니다. 학교명: ' + schoolCode);
+        alert('검색 로직을 수행 학교명: ' + schoolCode);
         modal2.style.display = 'none';
     } else {
         alert('학교명을 입력해주세요.');
@@ -171,19 +200,24 @@ function searchSchoolCode() {
 // 모달 검색 기능
 function searchSchoolCode() {
     var inputText = $('#schoolCodeInput').val(); // #schoolCodeInput ID를 가진 입력란에서 값을 가져와 inputText 변수에 저장
+    
     $.ajax({
         url: "https://jbeteacherstytem-dev.azurewebsites.net/api/schools",
         type: "get",
         dataType: "json",
-        data: { name: inputText }, // name????이라는 키에 inputText라는 변수의 값을 할당
+        data: { keyword: inputText }, // keyword이라는 키에 inputText라는 변수의 값을 할당
         success: function(result) {
+
+            // 필터링된 결과
+            var SchoolfilteredResult = result.filter(function (item) {
+                return item.schoolName.includes(inputText);
+            });
+
             var str = '';
 
-            $.each(result, function(i, item) {
-                if (item.schoolName === inputText) {
-                    var number = i + 1;
-                    str += '<tr><td>' + result[i].schoolNo + '</td><td>' + result[i] .schoolName + '</td></tr>';
-                }
+            $.each(SchoolfilteredResult, function(i, item) {
+                var number = i + 1;
+                str += '<tr><td>' + number + '</td><td>' + item.schoolName + '</td></tr>';
             });
 
             if (str !== '') {
@@ -192,10 +226,29 @@ function searchSchoolCode() {
                 $('.schoolTable_body').html('<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>');
             }
 
+            // 총 학교 수를 가져와서 표시
+            var totalSchools = SchoolfilteredResult.length;
+            $('#totalSchool').text('총 ' + totalSchools + '개');
+
             // 클릭 이벤트
             $('.schoolTable_body tr').on('click', function() {
                 $('.schoolTable_body tr').css('background-color', '');
                 $(this).css('background-color', '#F9F9F9'); 
+
+                // 선택된 학교의 식별코드 가져오기
+                selectedSchoolCode = $(this).find('td:eq(1)').text();
+            });
+
+            // 등록하기 버튼 클릭 이벤트
+            $('#registerSchool').on('click', function() {
+                if (selectedSchoolCode) {
+                    // 가져온 식별코드를 입력란에 넣기
+                    $('#school-heading input').val(selectedSchoolCode);
+                    modal2.style.display = 'none';
+                } else {
+                    // 클릭하지 않고 등록하기 버튼을 누른 경우
+                    openregisterPopup2();
+                }
             });
         },
         error: function(xhr, status, error) {
@@ -299,62 +352,31 @@ document.getElementById("file-input").addEventListener("change", function () {
 
 // ---------------------------------------------------------
 
-// HTML에서 클래스가 "select"인 모든 요소를 선택하여 document.querySelectorAll에 저장
-const selectBoxElements = document.querySelectorAll(".select");
+$(document).ready(function () {
+    // AJAX 호출
+    $.ajax({
+        url: "https://jbeteacherstytem-dev.azurewebsites.net/api/sports", 
+        type: "get",
+        dataType: "json",
+        success: function (data) {
 
-    // 선택 상자 함수
-    function toggleSelectBox(selectBox) {
-    selectBox.classList.toggle("active");
-    }
+            // DB 이용하여 옵션 동적으로 추가
+            var optionsHtml = '';
+            $.each(data, function (index, item) {
+                optionsHtml += '<option value="' + item.sportsNo + '">' + item.sportsName + '</option>';
+            });
 
-    // 옵션 선택 함수
-    function selectOption(optionElement) {
-    
-    // 선택한 옵션이 속한... 선택 상자를 찾고
-    const selectBox = optionElement.closest(".select");
-
-    // 그리고 선택 상자 내부에서 현재 선택된 항목을 나타내는 요소 찾고
-    const selectedElement = selectBox.querySelector(".selected-value");
-
-    // 선택한 옵션의 텍스트 내용을 현재 선택된 항목에 표시하고
-    selectedElement.textContent = optionElement.textContent;
-    }
-
-    // 각 선택 상자에 대한 이벤트 리스너
-    selectBoxElements.forEach(selectBoxElement => {
-    selectBoxElement.addEventListener("click", function (e) {
-        const targetElement = e.target;
-        const isOptionElement = targetElement.classList.contains("option");
-
-        // 클릭된 요소가 옵션인 경우 해당 옵션 선택 함수 호출, 그렇지 않으면 선택 상자 토글
-        if (isOptionElement) {
-        selectOption(targetElement);
+            // 옵션 추가
+            $('#sport-select-container1').append(optionsHtml);
+            $('#sport-select-container2').append(optionsHtml);
+        },
+        error: function (xhr, status, error) {
+            console.log("통신에러");
         }
-
-        toggleSelectBox(selectBoxElement);
-    });
-    });
-
-    // 문서 어느 곳이든 클릭할 때 발생하는 이벤트 리스너
-    document.addEventListener("click", function (e) {
-    const targetElement = e.target;
-
-    // 클릭된 요소가 선택 상자인지 또는 선택 상자의 하위 요소인지 확인
-    const isSelect = targetElement.classList.contains("select") || targetElement.closest(".select");
-
-    if (isSelect) {
-        return;
-    }
-    
-    // 클릭된 요소가 선택 상자 또는 선택 상자의 하위 요소가 아닌 경우 모든 선택 상자 비활성화
-    const allSelectBoxElements = document.querySelectorAll(".select");
-
-    allSelectBoxElements.forEach(boxElement => {
-        boxElement.classList.remove("active");
     });
 });
 
-// --------------------------------------
+// ---------------------------------------------------------
 
 function addRow1(button) {
     var table = document.getElementById("myTable1");
@@ -458,143 +480,156 @@ function deleteRow2(button) {
 
 // --------------------------------------------------
 
-// 등록하기 버튼 클릭 시 실행되는 함수
-document.querySelector('.button.register').addEventListener('click', function () {
-    validateAndRegister();
-});
-
-// 유효성 검사 및 팝업창 표시 함수
-function validateAndRegister() {
-    var isValid = validateInputs();
-
-    if (isValid) {
-        openSuccessPopup('지도자 등록이 성공했습니다.');
-    } else {
-        openErrorPopup('필수입력값을 모두 입력해주세요.');
+document.addEventListener("DOMContentLoaded", function () {
+    // 등록 버튼 엘리먼트 가져오기
+    var registerButton = document.querySelector(".button.register");
+  
+    // 등록 버튼에 클릭 이벤트 리스너 추가
+    registerButton.addEventListener("click", function () {
+      // 모든 필수 입력 필드가 채워져 있는지 확인
+      if (validateForm()) {
+        // 모든 필수 입력 필드가 채워져 있다면 button-register-success를 표시
+        document.getElementById("button-register-success").style.display = "block";
+      } else {
+        // 필수 입력 필드가 채워져 있지 않다면 button-register-error를 표시
+        document.getElementById("button-register-error").style.display = "block";
+      }
+    });
+  
+    // button-register-error의 확인 버튼에 클릭 이벤트 리스너 추가
+    document.querySelector("#button-register-error .confirm").addEventListener("click", function () {
+      // 확인 버튼 클릭 시 button-register-error 닫기
+      closeModal("button-register-error");
+    });
+  
+    // button-register-success의 취소 버튼에 클릭 이벤트 리스너 추가
+    document.querySelector("#button-register-success .cancel").addEventListener("click", function () {
+      // 취소 버튼 클릭 시 button-register-success 닫기
+      closeModal("button-register-success");
+    });
+  
+    // button-register-success의 확인 버튼에 클릭 이벤트 리스너 추가
+    document.querySelector("#button-register-success .confirm").addEventListener("click", function () {
+      // 확인 버튼 클릭 시 button-register-success 닫기
+      closeModal("button-register-success");
+  
+      // 서버에 데이터 저장 로직 실행
+      saveToServer();
+    });
+  });
+  
+  // 폼 유효성 검사 함수
+  function validateForm() {
+    var requiredFields = document.querySelectorAll(".required");
+  
+    // NodeList가 정상적으로 가져와졌는지 확인
+    if (!requiredFields) {
+      console.error("Required fields not found!");
+      return false;
     }
-}
-
-function validateInputs() {
-    // 사진 첨부 여부 확인
-    var photoInput = document.getElementById('file-input');
-    if (!photoInput.files.length) {
-        openregisterPopup3();
+  
+    for (var i = 0; i < requiredFields.length; i++) {
+        var field = requiredFields[i];
+        var fieldName = field.getAttribute("id");
+  
+        // 각 필드에 대한 검사
+        switch (fieldName) {
+          case "code":
+          case "school":
+          case "name":
+            if (field.value.trim() === "") {
+              alert(fieldName + "을(를) 입력하세요.");
+              return false;
+            }
+            break;
+  
+          case "birthdate":
+            if (field.value.trim() === "") {
+              alert("생년월일을 입력하세요.");
+              return false;
+            }
+            // 생년월일의 추가 유효성 검사를 원하는 방식으로 수행
+            break;
+  
+          case "gender":
+            var genderOptions = document.querySelectorAll('input[name="gender"]');
+            var selectedGender = Array.from(genderOptions).find(option => option.checked);
+  
+            if (!selectedGender) {
+              alert("성별을 선택하세요.");
+              return false;
+            }
+            break;
+  
+          case "sport":
+            var selectedSport = document.getElementById("sport-select-container1").value;
+            if (!selectedSport) {
+              alert("종목을 선택하세요.");
+              return false;
+            }
+            break;
+  
+          case "tel1":
+          case "tel2":
+          case "tel3":
+            // 전화번호의 추가 유효성 검사를 원하는 방식으로 수행
+            break;
+  
+          case "hire":
+            if (field.value.trim() === "") {
+              alert("최초채용일을 입력하세요.");
+              return false;
+            }
+            // 최초채용일의 추가 유효성 검사를 원하는 방식으로 수행
+            break;
+  
+          // 추가 필드에 대한 검사도 유사한 방식으로 추가 가능
+  
+          default:
+            break;
+        }
+      }
+  
+      // 근무 이력 테이블 검사
+      if (!validateWorkHistoryTable()) {
         return false;
-    }
-
-    // 식별코드 확인
-    var codeInput = document.querySelector('#code-heading input');
-    if (codeInput.value.trim() === '') {
-        openregisterPopup3();
+      }
+  
+      // 자격사항 테이블 검사
+      if (!validateQualificationTable()) {
         return false;
+      }
+  
+      return true;
+    }
+  
+    function validateWorkHistoryTable() {
+      // 근무 이력 테이블의 검사를 수행
+      // 예시: 테이블 내의 각 행에 대한 검사를 수행
+  
+      return true; // 테이블 검사가 성공하면 true 반환
+    }
+  
+    function validateQualificationTable() {
+      // 자격사항 테이블의 검사를 수행
+      // 예시: 테이블 내의 각 행에 대한 검사를 수행
+  
+      return true; // 테이블 검사가 성공하면 true 반환
     }
 
-    // 성명 확인
-    var nameInput = document.getElementById('exampleFormControlInput1');
-    if (nameInput.value.trim() === '') {
-        openregisterPopup3();
-        return false;
-    }
 
-    // 생년월일 확인
-    var birthdateInput = document.getElementById('birthdate');
-    if (birthdateInput.value === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 학교명 확인
-    var schoolInput = document.querySelector('#school-heading input');
-    if (schoolInput.value.trim() === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 종목 확인
-    var sportInput = document.querySelector('#sport-heading .selected-value');
-    if (sportInput.textContent === '종목을 선택해주세요.') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 근무지 전화번호 확인
-    var tel1Input = document.querySelector('#phone-heading [name="tel1"]');
-    var tel2Input = document.querySelector('#phone-heading [name="tel2"]');
-    var tel3Input = document.querySelector('#phone-heading [name="tel3"]');
-    if (tel1Input.value.trim() === '' || tel2Input.value.trim() === '' || tel3Input.value.trim() === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 최초채용 확인
-    var hireDateInput = document.getElementById('hire');
-    if (hireDateInput.value === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 성별 확인
-    var genderInput = document.querySelector('#gender-heading input:checked');
-    if (!genderInput) {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 근무 이력 확인
-    var startDateInput = document.querySelector('#myTable1 [name="start-date"]');
-    var endDateInput = document.querySelector('#myTable1 [name="end-date"]');
-    var sportHistoryInput = document.querySelector('#myTable1 select');
-    if (startDateInput.value === '' || endDateInput.value === '' || sportHistoryInput.value === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 자격사항 확인
-    var qualificationInput = document.querySelector('#myTable2 [name="qualification"]');
-    var numberInput = document.querySelector('#myTable2 [name="number"]');
-    var getDateInput = document.querySelector('#myTable2 [name="get-date"]');
-    var issuingAuthorityInput = document.querySelector('#myTable2 [name="issuing-authority"]');
-    if (qualificationInput.value.trim() === '' || numberInput.value.trim() === '' || getDateInput.value === '' || issuingAuthorityInput.value.trim() === '') {
-        openregisterPopup3();
-        return false;
-    }
-
-    // 모든 필수 입력값이 ok이면 true를 반환
-    return true;
-
-    function openregisterPopup3() {
-
-        // 팝업 열기
-        var popup = document.getElementById('registerPopup3');
-        popup.style.display = 'block';
-
-        // 확인 버튼 클릭
-        document.querySelector('#registerPopup3 .confirm').addEventListener('click', function() {
-            
-            popup.style.display = 'none';
-        });
-    }
-}
-
-document.querySelector('.button.register').addEventListener('click', function () {
-    if (validateInputs()) {
-        openregisterPopup4();
-    }
-    
-    function openregisterPopup4() {
-
-        // 팝업 열기
-        var popup = document.getElementById('registerPopup4');
-        popup.style.display = 'block';
-
-        // 확인 버튼 클릭
-        document.querySelector('#registerPopup4 .confirm').addEventListener('click', function() {
-            
-            popup.style.display = 'none';
-        });
-    }
-    
-});
+  // 모달 창 닫기 함수
+  function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+  }
+  
+  // 서버에 데이터 저장 함수 (실제 서버 로직으로 대체)
+  function saveToServer() {
+    // 여기에 서버에 데이터를 저장하는 로직을 구현
+    alert("데이터가 서버에 저장되었습니다!");
+  }
+  
 
 // --------------------------------------------------
 

@@ -133,7 +133,7 @@
                                                 </div>
                                                 <div class="button-box3">
                                                     <div class="button delete3" id="cancelSchool" onclick="closeModal2()">취소하기</div>
-                                                    <div class="button register3" id="registerSchool" onclick="closeModal2()">등록하기</div>
+                                                    <div class="button register3" id="registerSchool">등록하기</div>
                                                     <div id="registerPopup2" class="popup">
                                                         <h2>선택된 학교 없음</h2>
                                                         <span class="close" onclick="closePopup('registerPopup2')">&times;</span>
@@ -142,13 +142,13 @@
                                                     </div> 
                                                 </div>
                                             </div>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                     <div class="row custom-row">
                                         <div class="col-4 col-sm-4">
                                             <h8 id="name-heading" class="custom-heading">성명<span class="highlight-text">*</span>
-                                                <div class="mb-3">
-                                                    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="이름을 입력하세요." required>
+                                                <div class="input-group mb-3">
+                                                    <input type="text" class="form-control" id="form-control name-input" placeholder="이름을 입력하세요." required>
                                                 </div>
                                             </h8>
                                         </div>
@@ -177,16 +177,10 @@
                                     <div class="row custom-row">
                                         <div class="col-4 col-sm-4">
                                             <h8 id="sport-heading" class="custom-heading">종목<span class="highlight-text">*</span>
-                                                <div class="select">
-                                                    <div class="selected">
-                                                        <div class="selected-value">종목을 선택해주세요.</div>
-                                                        <div class="arrow"></div>
-                                                    </div>
-                                                    <ul>
-                                                        <li class="option">옵션1</li>
-                                                        <li class="option">옵션2</li>
-                                                        <li class="option">옵션3</li>
-                                                    </ul>
+                                                <div class="sport-select">
+                                                    <select class="form-select" aria-label="종목을 선택해주세요." id="sport-select-container1">
+                                                        <option value="">종목을 선택해주세요.</option>
+                                                    </select>
                                                 </div>
                                             </h8>
                                         </div>
@@ -225,12 +219,9 @@
                                     <td><input type="text" placeholder="학교명을 입력해주세요."></td>
                                     <td><input type="date" class="form-control" id="start-date" name="start-date" data-placeholder="근무 시작일을 선택해주세요." required></td>
                                     <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="근무 종료일을 선택해주세요." required></td>
-                                    <td>
-                                        <select>
-                                            <option value="" disabled selected>종목을 선택해주세요.</option>
-                                            <option value="option1">옵션 1</option>
-                                            <option value="option2">옵션 2</option>
-                                            <option value="option3">옵션 3</option>
+                                    <td id="sport-table">
+                                        <select class="form-select" aria-label="종목을 선택해주세요." id="sport-select-container2">
+                                            <option value="">종목을 선택해주세요.</option>
                                         </select>
                                         <button onclick="addRow1(this)">추가</button>
                                     </td>
@@ -267,15 +258,15 @@
                                 <button class="confirm">확인</button>
                             </div>
                             <div class="button register">등록하기</div>
-                            <div id="registerPopup3" class="popup">
+                            <div id="button-register-error" class="popup">
                                 <h2>필수입력값 확인</h2>
-                                <span class="close" onclick="closePopup('registerPopup3')">&times;</span>
+                                <span class="close" onclick="closePopup('button-register-error')">&times;</span>
                                 <p>필수입력값이 채워지지 않았습니다. </br>확인후 채워주시기 바랍니다.</p>
                                 <button class="confirm">확인</button>
                             </div>
-                            <div id="registerPopup4" class="popup">
+                            <div id="button-register-success" class="popup">
                                 <h2>지도자 등록</h2>
-                                <span class="close" onclick="closePopup('registerPopup3')">&times;</span>
+                                <span class="close" onclick="closePopup('button-register-success')">&times;</span>
                                 <p>입력한 내용으로 지도자를 등록하시겠습니까?</p>
                                 <button class="cancel">취소</button>
                                 <button class="confirm">확인</button>

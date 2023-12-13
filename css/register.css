@@ -217,7 +217,6 @@
 
 #container1 #code-heading input.form-control {
     font-size: 15px;
-    color: #969696; 
     border-color: #DDDDDD; 
 }
 
@@ -433,7 +432,6 @@ tr {
 
 #container1 #school-heading input.form-control {
     font-size: 15px;
-    color: #969696; 
     border-color: #DDDDDD; 
 }
 
@@ -582,6 +580,10 @@ tbody.schoolTable_body {
     font-weight: bold;
 }
 
+#container1 #name-heading input {
+    pointer-events: none;
+}
+
 #container1 #name-heading .mb-3 {
     margin-top: 10px;
     height: 43px;
@@ -650,80 +652,20 @@ input[data-placeholder]::before {
     font-weight: bold;
 }
 
-#container1 #sport-heading .select{
-    margin-top: 10px;
-    width: 281px;
-}
-
-#container1 .select {
-    font-weight: normal;
-    width: 179px;
-    margin-right: 13px;
-}
-
-#container1 .selected {
-    display: flex;
-    align-items: center;
-    padding: 10px 9px;
-    border: 1px solid #EEEEEE;
-    border-radius: 0.5em;
-    cursor: pointer;
-}
-
-#container1 .selected-value {
-    color: #969696;
+#container1 select {
     font-size: 15px;
-}
-
-#container1 .arrow {
-    border: 2px solid #969696;
-    border-width: 0 2px 2px 0;
-    padding: 4px;
-    transform: rotate(45deg);
-    margin-left: 100px;
-    margin-bottom: 5px;
-}
-
-#container1 ul {
+    color: #969696;
+    height: 43px;
     width: 281px;
-    height: 35px;
-    list-style: none;
-    padding: 0;
-    margin-top: 5px;
-    position: absolute;
-    display: none;
-    box-sizing: border-box;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    margin: 10px 0;
+    border: 1px solid #e4e4e4;
+    border-radius: 0.5em;
 }
 
-#container1 .option {
-    padding: 8px;
-    font-size: 13px;
-    color: #212529;
-    cursor: pointer;
-    background-color: #ffffff;
-    border: 2px solid #EEEEEE;
-}
-
-#container1 .option:first-child {
-    border-bottom: none; 
-}
-
-#container1 .option:nth-child(2) {
-    border-bottom: none;
-    border-top: none;
-}
-
-#container1 .option:last-child {
-    border-top: none; 
-}
-
-#container1 .option:hover {
-    background-color: #EEEEEE;
-    color: rgb(0, 0, 0);
-}
-
-#container1 .select.active ul {
-    display: block;
+#sport-select-container1 option {
+    color: #333;
 }
 
 /* ------------------------------------------ */
@@ -863,15 +805,25 @@ input[name="tel3"].custom-input {
 }
 
 /* 셀렉트 박스 스타일 */
-#container1 .section-heading2 select {
-    border: 1px solid #EEEEEE;
+#container1 #sport-select-container2 {
+    border: 1px solid #e7e7e7;
     border-radius: 0.5em;
     font-size: 15px;
     width: 264px;
     height: 43px;
-    padding: 8px;
-    font-size: 15px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     color: #969696;
+}
+
+#sport-select-container2 option {
+    color: #333;
+}
+
+#sport-table {
+    display: flex;
+    align-items: center;
+    gap: 8px;
 }
 
 /* 버튼 스타일 */
@@ -996,7 +948,7 @@ input[name="tel3"].custom-input {
 }
 
 /* 등록하기 버튼 클릭 시 유효값이 다 채워지지 않았을 때 */
-#registerPopup3.popup h2 {
+#button-register-error.popup h2 {
     font-size: 25px;
     color: #0F2D6A;
     text-align: center;
@@ -1004,13 +956,13 @@ input[name="tel3"].custom-input {
     font-weight: bold;
 }
 
-#registerPopup3 p {
+#button-register-error p {
     font-size: 15px;
     text-align: center;
     margin-top: 35px;
 }
 
-#registerPopup3 button.confirm {
+#button-register-error button.confirm {
     margin-left: 130px;
     margin-top: 15px;
     width: 88px;
@@ -1022,7 +974,7 @@ input[name="tel3"].custom-input {
 }
 
 /* 등록하기 버튼 클릭 시 유효값이 다 채워졌을 때*/
-#registerPopup4.popup h2 {
+#button-register-success.popup h2 {
     font-size: 25px;
     color: #0F2D6A;
     text-align: center;
@@ -1030,13 +982,13 @@ input[name="tel3"].custom-input {
     font-weight: bold;
 }
 
-#registerPopup4 p {
+#button-register-success p {
     font-size: 15px;
     text-align: center;
     margin-top: 35px;
 }
 
-#registerPopup4 button.confirm {
+#button-register-success button.confirm {
     width: 88px;
     height: 43px;
     background-color: #0F2D6A;
@@ -1045,7 +997,7 @@ input[name="tel3"].custom-input {
     border-radius: 0.5em;
 }
 
-#registerPopup4 button.cancel {
+#button-register-success button.cancel {
     margin-left: 85px;
     margin-top: 15px;
     width: 88px;

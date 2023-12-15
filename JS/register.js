@@ -379,7 +379,7 @@ $(document).ready(function () {
 // ---------------------------------------------------------
 
 function addRow1(button) {
-    var table = document.getElementById("myTable1");
+    var table = document.getElementById("Employment-History-Table");
     var row = button.parentNode.parentNode; // 현재 행 가져오기
     var newRow = row.cloneNode(true); // 행 복제
 
@@ -431,7 +431,7 @@ function deleteRow1(button) {
 // --------------------------------------
 
 function addRow2(button) {
-    var table = document.getElementById("myTable2");
+    var table = document.getElementById("Certificate-Table");
     var row = button.parentNode.parentNode; 
     var newRow = row.cloneNode(true);
 
@@ -480,157 +480,125 @@ function deleteRow2(button) {
 
 // --------------------------------------------------
 
-document.addEventListener("DOMContentLoaded", function () {
-    // 등록 버튼 엘리먼트 가져오기
-    var registerButton = document.querySelector(".button.register");
-  
-    // 등록 버튼에 클릭 이벤트 리스너 추가
-    registerButton.addEventListener("click", function () {
-      // 모든 필수 입력 필드가 채워져 있는지 확인
-      if (validateForm()) {
-        // 모든 필수 입력 필드가 채워져 있다면 button-register-success를 표시
-        document.getElementById("button-register-success").style.display = "block";
-      } else {
-        // 필수 입력 필드가 채워져 있지 않다면 button-register-error를 표시
-        document.getElementById("button-register-error").style.display = "block";
-      }
-    });
-  
-    // button-register-error의 확인 버튼에 클릭 이벤트 리스너 추가
-    document.querySelector("#button-register-error .confirm").addEventListener("click", function () {
-      // 확인 버튼 클릭 시 button-register-error 닫기
-      closeModal("button-register-error");
-    });
-  
-    // button-register-success의 취소 버튼에 클릭 이벤트 리스너 추가
-    document.querySelector("#button-register-success .cancel").addEventListener("click", function () {
-      // 취소 버튼 클릭 시 button-register-success 닫기
-      closeModal("button-register-success");
-    });
-  
-    // button-register-success의 확인 버튼에 클릭 이벤트 리스너 추가
-    document.querySelector("#button-register-success .confirm").addEventListener("click", function () {
-      // 확인 버튼 클릭 시 button-register-success 닫기
-      closeModal("button-register-success");
-  
-      // 서버에 데이터 저장 로직 실행
-      saveToServer();
-    });
-  });
-  
-  // 폼 유효성 검사 함수
-  function validateForm() {
-    var requiredFields = document.querySelectorAll(".required");
-  
-    // NodeList가 정상적으로 가져와졌는지 확인
-    if (!requiredFields) {
-      console.error("Required fields not found!");
-      return false;
-    }
-  
-    for (var i = 0; i < requiredFields.length; i++) {
-        var field = requiredFields[i];
-        var fieldName = field.getAttribute("id");
-  
-        // 각 필드에 대한 검사
-        switch (fieldName) {
-          case "code":
-          case "school":
-          case "name":
-            if (field.value.trim() === "") {
-              alert(fieldName + "을(를) 입력하세요.");
-              return false;
-            }
-            break;
-  
-          case "birthdate":
-            if (field.value.trim() === "") {
-              alert("생년월일을 입력하세요.");
-              return false;
-            }
-            // 생년월일의 추가 유효성 검사를 원하는 방식으로 수행
-            break;
-  
-          case "gender":
-            var genderOptions = document.querySelectorAll('input[name="gender"]');
-            var selectedGender = Array.from(genderOptions).find(option => option.checked);
-  
-            if (!selectedGender) {
-              alert("성별을 선택하세요.");
-              return false;
-            }
-            break;
-  
-          case "sport":
-            var selectedSport = document.getElementById("sport-select-container1").value;
-            if (!selectedSport) {
-              alert("종목을 선택하세요.");
-              return false;
-            }
-            break;
-  
-          case "tel1":
-          case "tel2":
-          case "tel3":
-            // 전화번호의 추가 유효성 검사를 원하는 방식으로 수행
-            break;
-  
-          case "hire":
-            if (field.value.trim() === "") {
-              alert("최초채용일을 입력하세요.");
-              return false;
-            }
-            // 최초채용일의 추가 유효성 검사를 원하는 방식으로 수행
-            break;
-  
-          // 추가 필드에 대한 검사도 유사한 방식으로 추가 가능
-  
-          default:
-            break;
+document.addEventListener('DOMContentLoaded', function () {
+    // 등록하기 버튼 클릭 시 처리
+    document.querySelector('.register').addEventListener('click', function () {
+        // 필수 입력값 체크
+        var requiredInputs = document.querySelectorAll('[required]');
+        var requiredInputsFilled = Array.from(requiredInputs).every(function (input) {
+            return input.value.trim() !== ''; // 값이 비어있는지 확인
+                                              // 비어있으면 true, 비어있지 않으면 false 반환
+        });
+
+        // 이미지 유효성 검사
+        var fileInput = document.getElementById('file-input');
+        var selectedImage = document.getElementById('selected-image');
+        var fileValid = fileInput.files.length > 0;
+        var maxFileSizeKB = 1; // 최대 허용 파일 크기 (MB)
+        
+        // 식별코드 유효성 검사
+        var codeInput = document.querySelector('#code-heading input');
+        var codeValid = codeInput.value.trim() !== '';
+
+        // 학교명 유효성 검사
+        var schoolInput = document.querySelector('#school-heading input');
+        var schoolValid = schoolInput.value.trim() !== '';
+
+        // 성명 유효성 검사
+        var nameInput = document.querySelector('#name-heading input');
+        var nameValid = nameInput.value.trim() !== '';
+
+        // 생년월일 유효성 검사
+        var dobInput = document.querySelector('#dob-heading input');
+        var dobValid = dobInput.value.trim() !== '';
+
+        // 종목 유효성 검사
+        var sportSelect = document.querySelector('#sport-select-container1');
+        var sportValid = sportSelect.value !== '';
+
+        // 근무지 전화번호 유효성 검사
+        var telInputs = document.querySelectorAll('#phone-heading input');
+        var telValid = Array.from(telInputs).every(function (telInput) {
+            return /^\d+$/.test(telInput.value.trim());
+        });
+
+        console.log('requiredInputsFilled:', requiredInputsFilled);
+        console.log('fileValid:', fileValid);
+        console.log('codeValid:', codeValid);
+        console.log('schoolValid:', schoolValid);
+        console.log('nameValid:', nameValid);
+        console.log('dobValid:', dobValid);
+        console.log('sportValid:', sportValid);
+        console.log('telValid:', telValid);
+
+        // 최초채용 유효성 검사
+        var hireInput = document.querySelector('#hire-date-heading input');
+        var hireValid = hireInput.value.trim() !== '';
+
+        // 근무 이력 테이블 필수 입력값 체크
+        var workTable = document.getElementById('Employment-History-Table');
+        var workTableInputs = workTable.querySelectorAll('input[required]');
+        var workTableFilled = Array.from(workTableInputs).every(function (input) {
+            return input.value.trim() !== '';
+        });
+
+        // 자격사항 테이블 필수 입력값 체크
+        var qualTable = document.getElementById('Certificate-Table');
+        var qualTableInputs = qualTable.querySelectorAll('input[required]');
+        var qualTableFilled = Array.from(qualTableInputs).every(function (input) {
+            return input.value.trim() !== '';
+        });
+
+        // 이미지 파일 크기 유효성 검사
+        if (!telValid) {
+            console.log('근무지 전화번호가 숫자로 입력되지 않았습니다!');
+            alert('근무지 전화번호는 숫자로만 입력해주세요!');
+            return; // 근무지 전화번호를 숫자로 입력하지 않으면 함수 종료
+        } else if (!fileValid || (fileInput.files[0].size / (1024 * 1024) > maxFileSizeKB)) {
+            alert('파일 크기는 ' + maxFileSizeKB + 'MB 이하로 등록해주세요!');
+            return; // 이미지 파일 크기가 초과하면 함수 종료
         }
-      }
-  
-      // 근무 이력 테이블 검사
-      if (!validateWorkHistoryTable()) {
-        return false;
-      }
-  
-      // 자격사항 테이블 검사
-      if (!validateQualificationTable()) {
-        return false;
-      }
-  
-      return true;
-    }
-  
-    function validateWorkHistoryTable() {
-      // 근무 이력 테이블의 검사를 수행
-      // 예시: 테이블 내의 각 행에 대한 검사를 수행
-  
-      return true; // 테이블 검사가 성공하면 true 반환
-    }
-  
-    function validateQualificationTable() {
-      // 자격사항 테이블의 검사를 수행
-      // 예시: 테이블 내의 각 행에 대한 검사를 수행
-  
-      return true; // 테이블 검사가 성공하면 true 반환
-    }
 
+        // 필수 입력값이 모두 채워져 있을 때 등록 모달창 띄우기
+        if (
+            requiredInputsFilled &&
+            codeValid &&
+            schoolValid &&
+            nameValid &&
+            dobValid &&
+            sportValid &&
+            hireValid &&
+            workTableFilled &&
+            qualTableFilled
+        ) {
+            document.getElementById('button-register-success').style.display = 'block';
+        } else {
+            // 필수 입력값이 비어있어간 조건을 만족하지 못할 때 오류 모달창 띄우기
+            document.getElementById('button-register-error').style.display = 'block';
+        }
 
-  // 모달 창 닫기 함수
-  function closeModal(modalId) {
-    var modal = document.getElementById(modalId);
-    modal.style.display = "none";
-  }
-  
-  // 서버에 데이터 저장 함수 (실제 서버 로직으로 대체)
-  function saveToServer() {
-    // 여기에 서버에 데이터를 저장하는 로직을 구현
-    alert("데이터가 서버에 저장되었습니다!");
-  }
-  
+    });
 
+    // 등록 모달창에서 확인 버튼 클릭 시 서버에 저장되도록 하는 함수
+    document.querySelector('#button-register-success .confirm').addEventListener('click', function () {
+        alert('서버에 저장되었습니다.');
+        // 모달창 닫기
+        document.getElementById('button-register-success').style.display = 'none';
+    });
+
+    // 등록 모달창에서 취소 버튼 클릭 시 모달창 닫기
+    document.querySelector('#button-register-success .cancel').addEventListener('click', function () {
+        document.getElementById('button-register-success').style.display = 'none';
+    });
+
+    // 오류 모달창에서 확인 버튼 클릭 시 모달창 닫기
+    document.querySelector('#button-register-error .confirm').addEventListener('click', function () {
+        document.getElementById('button-register-error').style.display = 'none';
+    });
+});
+
+  
+  
 // --------------------------------------------------
 
 // 취소하기 버튼 클릭 시 팝업 띄우기

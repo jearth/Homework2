@@ -522,15 +522,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return /^\d+$/.test(telInput.value.trim());
         });
 
-        console.log('requiredInputsFilled:', requiredInputsFilled);
-        console.log('fileValid:', fileValid);
-        console.log('codeValid:', codeValid);
-        console.log('schoolValid:', schoolValid);
-        console.log('nameValid:', nameValid);
-        console.log('dobValid:', dobValid);
-        console.log('sportValid:', sportValid);
-        console.log('telValid:', telValid);
-
         // 최초채용 유효성 검사
         var hireInput = document.querySelector('#hire-date-heading input');
         var hireValid = hireInput.value.trim() !== '';

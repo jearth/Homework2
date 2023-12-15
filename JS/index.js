@@ -59,6 +59,13 @@ function searchLeaderCode() {
     var inputText = $('#searchInput').val();
     var searchType = $('.select .selected-value').text();
 
+    // 검색어가 비어 있는 경우 페이지 초기화
+    if (inputText.trim() === '') {
+        currentPage = 1;
+        loadTableData();
+        return;
+    }
+
     $.ajax({
         url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders/list",
         type: "get",

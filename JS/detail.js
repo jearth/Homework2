@@ -14,29 +14,49 @@ function loadLeaderDetails(leaderNo) {
         success: function (result) {
             console.log(result);
 
-            // 근무 이력 테이블
-            var historyStr = '';
-            $.each(result.history, function (i, val) {
-                // console.log('i:', i, 'val:', val);
-                historyStr += '<tr><td>' + val.startDT + '</td><td>' + val.endDT + '</td><td>' + val.schoolName + '</td><td>' + val.sportName + '</td></tr>';
-            });
-            $('.historyTable_body').append(historyStr);
-
-            // 자격사항 테이블
-            var certificateStr = '';
-            $.each(result.certificate, function (i, val) {
-                // console.log('i:', i, 'val:', val);
-                certificateStr += '<tr><td>' + val.certificateName + '</td><td>' + val.certificateNumber + '</td><td>' + val.certificateDT + '</td><td>' + val.organization + '</td></tr>';
-            });
-            $('.certificateTable_body').append(certificateStr);
-
+            fillHistoryTable(result.history);
+            fillCertificateTable(result.certificate);
             displayData(result);
-
         },
         error: function (error) {
             console.error('데이터를 가져오는 중 오류 발생:', error);
         }
     });
+}
+
+function fillHistoryTable(historyData) {
+    var historyStr = '';
+    $.each(historyData, function (i, val) {
+        var formattedStartDT = formatDate(val.startDT); // 날짜 형식 가공
+        var formattedEndDT = formatDate(val.endDT); // 종료일도 가공이 필요하다면
+
+        historyStr += '<tr><td>' + formattedStartDT + '</td><td>' + formattedEndDT + '</td><td>' + val.schoolName + '</td><td>' + val.sportName + '</td></tr>';
+    });
+    $('.historyTable_body').append(historyStr);
+}
+
+// 날짜 형식을 가공하는 함수
+function formatDate(dateString) {
+    var date = new Date(dateString);
+    var formattedDate = date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate();
+    return formattedDate;
+}
+
+function fillCertificateTable(certificateData) {
+    var certificateStr = '';
+    $.each(certificateData, function (i, val) {
+        var formattedCertificateDT = formatDate(val.certificateDT); // 날짜 형식 가공
+
+        certificateStr += '<tr><td>' + val.certificateName + '</td><td>' + val.certificateNumber + '</td><td>' + formattedCertificateDT + '</td><td>' + val.organization + '</td></tr>';
+    });
+    $('.certificateTable_body').append(certificateStr);
+}
+
+// 날짜 형식을 가공하는 함수
+function formatDate(dateString) {
+    var date = new Date(dateString);
+    var formattedDate = date.getFullYear() + '.' + (date.getMonth() + 1) + '.' + date.getDate();
+    return formattedDate;
 }
 
 // 받아온 데이터를 화면에 표시하는 함수
@@ -66,6 +86,4 @@ function displayData(data) {
     $('#sportNameResult').text(data.sportName);
     $('#telNoResult').text(data.telNo);
     $('#empDTResult').text(formattedempDT);
-
-
 }

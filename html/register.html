@@ -186,7 +186,7 @@
                                         </div>
                                         <div class="col-4 col-sm-4">
                                             <h8 id="phone-heading" class="custom-heading">근무지 전화번호</h8><span class="highlight-text">*</span>
-                                            <div class="d-inline-flex">
+                                            <div class="d-inline-flex" id="tel-heading">
                                                 <input type="tel" size="3" name="tel1" class="form-control custom-input" placeholder="063" maxlength="3">
                                                 <span class="dash">-</span>                                                
                                                 <input type="tel" size="4" name="tel2" class="form-control custom-input" placeholder="1234" maxlength="4">
@@ -215,7 +215,7 @@
                                     <th>근무종료일</th>
                                     <th>종목</th>
                                 </tr>
-                                <tr>
+                                <tr id="Employment-History-Tr">
                                     <td><input type="text" placeholder="학교명을 입력해주세요."></td>
                                     <td><input type="date" class="form-control" id="start-date" name="start-date" data-placeholder="근무 시작일을 선택해주세요." required></td>
                                     <td><input type="date" class="form-control" id="end-date" name="end-date" data-placeholder="근무 종료일을 선택해주세요." required></td>
@@ -245,7 +245,7 @@
                                         <input type="text" placeholder="발급기관을 입력해주세요.">
                                         <button onclick="addRow2(this)">추가</button>
                                     </td>
-                                </tr>                            
+                                </tr>
                             </table>
                         </h4>
                         <div class="button-box">

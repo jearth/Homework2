@@ -159,7 +159,7 @@
     padding: 0;
     margin: 0;
     position: absolute;
-    top: 29%;
+    top: 30%;
     display: none;
     box-sizing: border-box;
 }
@@ -430,24 +430,11 @@ thead {
 
 /* ---------------------------------------- */
 
-.col .pagination-container {
-    display: flex;
-    align-items: center;
-}
-
-
-.col .pagination-container .pagination-item {
-    cursor: pointer;
-    margin-right: 5px;
-    padding: 5px 5px;
-    cursor: pointer;
-    font-size: 17px;
+.pagination a {
+    color: #0F2D6A;
+    border: #ffffff;
     font-weight: bold;
-}
- 
-.col .pagination-container .pagination-item:hover {
-    background-color: #0F2D6A;
-    color: #ffffff;
+    font-size: 18px;
 }
 
 /* ---------------------------------------- */

@@ -11,158 +11,98 @@
 //     }
 // })
 
+document.addEventListener('DOMContentLoaded', function () {
+    var modal = document.getElementById('myModal1');
+    var button = document.getElementById('button-addon2');
+    var closeBtn = document.getElementsByClassName('close')[0];
+    var cancelleaders = document.getElementById('cancelleaders');
+    var selectedLeaderCode = null;
+    var selectedLeaderName = null;
 
-// 모달 창
-var modal = document.getElementById('myModal1');
+    button.onclick = function () {
+        modal.style.display = 'block';
+        searchLeaders();
+    };
 
-// 모달을 열기 위한 버튼
-var button = document.getElementById('button-addon2');
+    closeBtn.onclick = function () {
+        modal.style.display = 'none';
+    };
 
-// 모달을 닫기 위한 닫기 버튼
-var closeBtn = document.getElementsByClassName('close')[0];
+    cancelleaders.onclick = function () {
+        modal.style.display = 'none';
+    };
 
-// "식별코드검색" 버튼 클릭 시 모달 열기
-button.onclick = function() {
-    modal.style.display = 'block';
-};
+    function openregisterPopup1() {
+        var popup = document.getElementById('registerPopup1');
+        popup.style.display = 'block';
 
-// 모달 닫기 버튼 클릭 시 모달 닫기
-closeBtn.onclick = function() {
-    modal.style.display = 'none';
-};
-
-// 취소하기 버튼 클릭 시 모달 닫기
-cancelleaders.onclick = function() {
-    modal.style.display = 'none';
-};
-
-$.ajax({
-    url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
-    type: "get",
-    dataType: "json",
-    success: function(result) {
-        var str = '';
-        $.each(result, function(i, item) {
-            var number = i + 1;
-            str += '<tr><td>' + number + '</td><td>' + result[i].leaderName + '</td><td>' + result[i].leaderNO + '</td></tr>';
+        document.querySelector('#registerPopup1 .confirm').addEventListener('click', function () {
+            popup.style.display = 'none';
         });
-        $('.leaderTable_body').append(str);
-
-        // 총 지도자 수를 가져와서 표시
-        var totalLeaders = result.length;
-        $('#totalLeaders').text('총 ' + totalLeaders + '명');
-
-        // 선택된 리더의 식별코드
-        var selectedLeaderCode = null;
-
-        // 클릭 이벤트
-        $('.leaderTable_body tr').on('click', function() {
-            $('.leaderTable_body tr').css('background-color', '');
-            $(this).css('background-color', '#F9F9F9');
-
-            // 선택된 리더의 식별코드 가져오기
-            selectedLeaderName = $(this).find('td:eq(1)').text();
-            selectedLeaderCode = $(this).find('td:eq(2)').text();
-        });
-
-        // 등록하기 버튼 클릭 이벤트
-        $('#registerleaders').on('click', function() {
-            if (selectedLeaderCode) {
-                // 가져온 식별코드를 입력란에 넣기
-                $('#code-heading input').val(selectedLeaderCode);
-                $('#name-heading input').val(selectedLeaderName);
-                modal.style.display = 'none';
-            } else {
-                openregisterPopup1();
-            }
-        });
-
-        // 팝업 창 열기
-        function openregisterPopup1() {
-
-            // 팝업 열기
-            var popup = document.getElementById('registerPopup1');
-            popup.style.display = 'block';
-
-            // 확인 버튼 클릭
-            document.querySelector('#registerPopup1 .confirm').addEventListener('click', function() {
-                
-                popup.style.display = 'none';
-            });
-        }
-    },
-    error: function(xhr, status, error) {
-        console.log("통신에러");
     }
-});
 
+    function renderLeaderTable(result) {
+        var str = '';
+        result.forEach(function (item, i) {
+            var number = i + 1;
+            str += '<tr><td>' + number + '</td><td>' + item.leaderName + '</td><td>' + item.leaderNO + '</td></tr>';
+        });
+        document.querySelector('.leaderTable_body').innerHTML = str;
 
-// 모달 검색 기능
-function searchLeaderCode() {
-    var inputText = $('#leaderCodeInput').val(); // #leaderCodeInput ID를 가진 입력란에서 값을 가져와 inputText 변수에 저장
-
-    $.ajax({
-        url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
-        type: "get",
-        dataType: "json",
-        data: { keyword: inputText }, // keyword이라는 키에 inputText라는 변수의 값을 할당
-        success: function(result) {
-
-            // 필터링된 결과
-            var LeaderfilteredResult = result.filter(function (item) {
-                return item.leaderName.includes(inputText);
+        document.querySelectorAll('.leaderTable_body tr').forEach(function (tr) {
+            tr.addEventListener('click', function () {
+                document.querySelectorAll('.leaderTable_body tr').forEach(function (row) {
+                    row.style.backgroundColor = '';
+                });
+                tr.style.backgroundColor = '#F9F9F9';
+        
+                var tds = tr.querySelectorAll('td');
+                selectedLeaderCode = tds[2].innerText;
+                selectedLeaderName = tds[1].innerText;
             });
+        });
+        
+    }
 
-            var str = '';
+    function searchLeaders() {
+        var inputText = document.getElementById('leaderCodeInput').value;
 
-            $.each(LeaderfilteredResult, function(i, item) {
-                var number = i + 1;
-                str += '<tr><td>' + number + '</td><td>' + item.leaderName + '</td><td>' + item.leaderNO + '</td></tr>';
-            });
+        $.ajax({
+            url: "https://jbeteacherstytem-dev.azurewebsites.net/api/leaders",
+            type: "get",
+            dataType: "json",
+            data: { keyword: inputText },
+            success: function (result) {
+                renderLeaderTable(result);
 
-            if (str !== '') {
-                $('.leaderTable_body').html(str); // 선택된 요소의 내용을 지정된 문자열 str로 설정
-            } else {
-                $('.leaderTable_body').html('<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>');
+                // 등록하기 버튼 클릭 이벤트
+                document.getElementById('registerleaders').addEventListener('click', function () {
+                    if (selectedLeaderCode) {
+                        document.getElementById('code-heading').querySelector('input').value = selectedLeaderCode;
+                        document.getElementById('name-heading').querySelector('input').value = selectedLeaderName;
+                        modal.style.display = 'none';
+                    } else {
+                        openregisterPopup1();
+                    }
+                });
+
+                // 총 지도자 수 업데이트
+                document.getElementById('totalLeaders').innerText = '총 ' + result.length + '명';
+            },
+            error: function (xhr, status, error) {
+                console.log("통신에러");
             }
+        });
+    }
 
-            // 업데이트된 지도자 수
-            var totalLeaders = LeaderfilteredResult.length;
-            $('#totalLeaders').text('총 ' + totalLeaders + '명');
-
-            // 클릭 이벤트
-            $('.leaderTable_body tr').on('click', function() {
-                $('.leaderTable_body tr').css('background-color', '');
-                $(this).css('background-color', '#F9F9F9');
-
-                 // 선택된 리더의 식별코드, 이름 가져오기
-                selectedLeaderCode = $(this).find('td:eq(2)').text(); 
-                selectedLeaderName = $(this).find('td:eq(1)').text();  
-            });
-
-            // 등록하기 버튼 클릭 이벤트
-            $('#registerleaders').on('click', function() {
-                if (selectedLeaderCode) {
-                    // 가져온 식별코드를 입력란에 넣기
-                    $('#code-heading input').val(selectedLeaderCode);
-                    $('#name-heading input').val(selectedLeaderName);
-
-                    modal.style.display = 'none';
-                } else {
-                    openregisterPopup1();
-                }
-            });
-        },
-        error: function(xhr, status, error) {
-            console.log("통신에러");
-        }
-    });
-}
+    // 최초 실행 시 호출
+    searchLeaders();
+});
 
 
 // -------------------------------------------------
 
-// 모달 창
+// 모달2 창
 var modal2 = document.getElementById('myModal2');
 
 // 모달을 열기 위한 버튼
@@ -171,85 +111,30 @@ var button2 = document.getElementById('button-addon3');
 // 모달을 닫기 위한 닫기 버튼
 var closeBtn2 = modal2.querySelector('.close');
 
-// "학교 식별코드검색" 버튼 클릭 시 모달 열기
+// "학교 식별코드검색" 버튼 클릭 시 모달2 열기
 button2.onclick = function() {
     modal2.style.display = 'block';
 };
 
-// 모달 닫기 버튼 클릭 시 모달 닫기
+// 모달2 닫기 버튼 클릭 시 모달2 닫기
 closeBtn2.onclick = function() {
     modal2.style.display = 'none';
 };
 
-// 취소 버튼 클릭 시 모달 닫기
+// 취소 버튼 클릭 시 모달2 닫기
 cancelSchool.onclick = function() {
     modal2.style.display = 'none';
 };
 
-// 학교 식별코드를 검색하는 함수
-function searchSchoolCode() {
-    var schoolCode = document.getElementById('schoolCodeInput').value;
-    if (schoolCode.trim() !== '') {
-        alert('검색 로직을 수행 학교명: ' + schoolCode);
-        modal2.style.display = 'none';
-    } else {
-        alert('학교명을 입력해주세요.');
-    }
-}
-
-// 모달 검색 기능
-function searchSchoolCode() {
-    var inputText = $('#schoolCodeInput').val(); // #schoolCodeInput ID를 가진 입력란에서 값을 가져와 inputText 변수에 저장
-    
+// 학교 정보 초기화 및 검색하는 함수
+function initializeAndSearchSchoolInfo(keyword) {
     $.ajax({
         url: "https://jbeteacherstytem-dev.azurewebsites.net/api/schools",
         type: "get",
         dataType: "json",
-        data: { keyword: inputText }, // keyword이라는 키에 inputText라는 변수의 값을 할당
+        data: { keyword: keyword },
         success: function(result) {
-
-            // 필터링된 결과
-            var SchoolfilteredResult = result.filter(function (item) {
-                return item.schoolName.includes(inputText);
-            });
-
-            var str = '';
-
-            $.each(SchoolfilteredResult, function(i, item) {
-                var number = i + 1;
-                str += '<tr><td>' + number + '</td><td>' + item.schoolName + '</td></tr>';
-            });
-
-            if (str !== '') {
-                $('.schoolTable_body').html(str); // 선택된 요소의 내용을 지정된 문자열 str로 설정
-            } else {
-                $('.schoolTable_body').html('<tr><td colspan="3">검색된 결과가 없습니다.</td></tr>');
-            }
-
-            // 총 학교 수를 가져와서 표시
-            var totalSchools = SchoolfilteredResult.length;
-            $('#totalSchool').text('총 ' + totalSchools + '개');
-
-            // 클릭 이벤트
-            $('.schoolTable_body tr').on('click', function() {
-                $('.schoolTable_body tr').css('background-color', '');
-                $(this).css('background-color', '#F9F9F9'); 
-
-                // 선택된 학교의 식별코드 가져오기
-                selectedSchoolCode = $(this).find('td:eq(1)').text();
-            });
-
-            // 등록하기 버튼 클릭 이벤트
-            $('#registerSchool').on('click', function() {
-                if (selectedSchoolCode) {
-                    // 가져온 식별코드를 입력란에 넣기
-                    $('#school-heading input').val(selectedSchoolCode);
-                    modal2.style.display = 'none';
-                } else {
-                    // 클릭하지 않고 등록하기 버튼을 누른 경우
-                    openregisterPopup2();
-                }
-            });
+            handleSchoolSearchResult(result);
         },
         error: function(xhr, status, error) {
             console.log("통신에러");
@@ -257,63 +142,58 @@ function searchSchoolCode() {
     });
 }
 
-$.ajax({
-    url: "https://jbeteacherstytem-dev.azurewebsites.net/api/schools",
-    type: "get",
-    dataType: "json",
-    success: function(result) {
-        var str = '';
-        $.each(result, function(i, item) {
-            var number = i + 1;
-            str += '<tr><td>' + number + '</td><td>' + result[i].schoolName + '</td></tr>';
-        });
-        $('.schoolTable_body').append(str);
+// 학교 정보 검색 결과 처리 함수
+function handleSchoolSearchResult(result) {
+    var str = '';
+    $.each(result, function(i, item) {
+        var number = i + 1;
+        str += '<tr><td>' + number + '</td><td>' + item.schoolName + '</td></tr>';
+    });
+    $('.schoolTable_body').html(str);
 
-        // 총 학교 수를 가져와서 표시
-        var totalSchools = result.length;
-        $('#totalSchool').text('총 ' + totalSchools + '개');
+    // 총 학교 수를 가져와서 표시
+    var totalSchools = result.length;
+    $('#totalSchool').text('총 ' + totalSchools + '개');
 
-        // 선택된 학교의 식별코드
-        var selectedSchoolCode = null;
+    // 선택된 학교의 식별코드
+    var selectedSchoolCode = null;
 
-        // 학교 행 클릭 이벤트
-        $('.schoolTable_body tr').on('click', function() {
-            $('.schoolTable_body tr').css('background-color', '');
-            $(this).css('background-color', '#F9F9F9');
+    // 학교 행 클릭 이벤트
+    $('.schoolTable_body tr').on('click', function() {
+        $('.schoolTable_body tr').css('background-color', '');
+        $(this).css('background-color', '#F9F9F9');
 
-            // 선택된 학교의 식별코드 가져오기
-            selectedSchoolCode = $(this).find('td:eq(1)').text();
-        });
+        // 선택된 학교의 식별코드 가져오기
+        selectedSchoolCode = $(this).find('td:eq(1)').text();
+    });
 
-        // 등록하기 버튼 클릭 이벤트
-        $('#registerSchool').on('click', function() {
-            if (selectedSchoolCode) {
-                // 가져온 식별코드를 입력란에 넣기
-                $('#school-heading input').val(selectedSchoolCode);
-                modal2.style.display = 'none';
-            } else {
-                // 클릭하지 않고 등록하기 버튼을 누른 경우
-                openregisterPopup2();
-            }
-        });
-        // 팝업 창 열기
-        function openregisterPopup2() {
-
-            // 팝업 열기
-            var popup = document.getElementById('registerPopup2');
-            popup.style.display = 'block';
-
-            // 확인 버튼 클릭
-            document.querySelector('#registerPopup2 .confirm').addEventListener('click', function() {
-                
-                popup.style.display = 'none';
-            });
+    // 등록하기 버튼 클릭 이벤트
+    $('#registerSchool').on('click', function() {
+        if (selectedSchoolCode) {
+            // 가져온 식별코드를 입력란에 넣기
+            $('#school-heading input').val(selectedSchoolCode);
+            modal2.style.display = 'none';
+        } else {
+            // 클릭하지 않고 등록하기 버튼을 누른 경우
+            openregisterPopup2();
         }
-    },
-    error: function(xhr, status, error) {
-        console.log("통신에러");
+    });
+
+    // 팝업 창 열기
+    function openregisterPopup2() {
+        // 팝업 열기
+        var popup = document.getElementById('registerPopup2');
+        popup.style.display = 'block';
+
+        // 확인 버튼 클릭
+        document.querySelector('#registerPopup2 .confirm').addEventListener('click', function() {
+            popup.style.display = 'none';
+        });
     }
-});
+}
+
+// 초기화 함수 호출
+initializeAndSearchSchoolInfo('');
 
 
 // -------------------------------------
@@ -481,100 +361,13 @@ function deleteRow2(button) {
 // --------------------------------------------------
 
 document.addEventListener('DOMContentLoaded', function () {
+    initializeEventListeners();
+});
+
+function initializeEventListeners() {
     // 등록하기 버튼 클릭 시 처리
     document.querySelector('.register').addEventListener('click', function () {
-        // 필수 입력값 체크
-        var requiredInputs = document.querySelectorAll('[required]');
-        var requiredInputsFilled = Array.from(requiredInputs).every(function (input) {
-            return input.value.trim() !== ''; // 값이 비어있는지 확인
-                                              // 비어있으면 true, 비어있지 않으면 false 반환
-        });
-
-        // 이미지 유효성 검사
-        var fileInput = document.getElementById('file-input');
-        var selectedImage = document.getElementById('selected-image');
-        var fileValid = fileInput.files.length > 0;
-        var maxFileSizeKB = 1; // 최대 허용 파일 크기 (MB)
-        
-        // 식별코드 유효성 검사
-        var codeInput = document.querySelector('#code-heading input');
-        var codeValid = codeInput.value.trim() !== '';
-
-        // 학교명 유효성 검사
-        var schoolInput = document.querySelector('#school-heading input');
-        var schoolValid = schoolInput.value.trim() !== '';
-
-        // 성명 유효성 검사
-        var nameInput = document.querySelector('#name-heading input');
-        var nameValid = nameInput.value.trim() !== '';
-
-        // 생년월일 유효성 검사
-        var dobInput = document.querySelector('#dob-heading input');
-        var dobValid = dobInput.value.trim() !== '';
-
-        // 종목 유효성 검사
-        var sportSelect = document.querySelector('#sport-select-container1');
-        var sportValid = sportSelect.value !== '';
-
-        // 근무지 전화번호 유효성 검사
-        var telInputs = document.querySelectorAll('#phone-heading input');
-        var telValid = Array.from(telInputs).every(function (telInput) {
-            return /^\d+$/.test(telInput.value.trim());
-        });
-
-        // 최초채용 유효성 검사
-        var hireInput = document.querySelector('#hire-date-heading input');
-        var hireValid = hireInput.value.trim() !== '';
-
-        // 근무 이력 테이블 필수 입력값 체크
-        var workTable = document.getElementById('Employment-History-Table');
-        var workTableInputs = workTable.querySelectorAll('input[required]');
-        var workTableFilled = Array.from(workTableInputs).every(function (input) {
-            return input.value.trim() !== '';
-        });
-
-        // 자격사항 테이블 필수 입력값 체크
-        var qualTable = document.getElementById('Certificate-Table');
-        var qualTableInputs = qualTable.querySelectorAll('input[required]');
-        var qualTableFilled = Array.from(qualTableInputs).every(function (input) {
-            return input.value.trim() !== '';
-        });
-
-        // 이미지 파일 크기 유효성 검사
-        if (!telValid) {
-            console.log('근무지 전화번호가 숫자로 입력되지 않았습니다!');
-            alert('근무지 전화번호는 숫자로만 입력해주세요!');
-            return; // 근무지 전화번호를 숫자로 입력하지 않으면 함수 종료
-        } else if (!fileValid || (fileInput.files[0].size / (1024 * 1024) > maxFileSizeKB)) {
-            alert('파일 크기는 ' + maxFileSizeKB + 'MB 이하로 등록해주세요!');
-            return; // 이미지 파일 크기가 초과하면 함수 종료
-        }
-
-        // 필수 입력값이 모두 채워져 있을 때 등록 모달창 띄우기
-        if (
-            requiredInputsFilled &&
-            codeValid &&
-            schoolValid &&
-            nameValid &&
-            dobValid &&
-            sportValid &&
-            hireValid &&
-            workTableFilled &&
-            qualTableFilled
-        ) {
-            document.getElementById('button-register-success').style.display = 'block';
-        } else {
-            // 필수 입력값이 비어있어간 조건을 만족하지 못할 때 오류 모달창 띄우기
-            document.getElementById('button-register-error').style.display = 'block';
-        }
-
-    });
-
-    // 등록 모달창에서 확인 버튼 클릭 시 서버에 저장되도록 하는 함수
-    document.querySelector('#button-register-success .confirm').addEventListener('click', function () {
-        alert('서버에 저장되었습니다.');
-        // 모달창 닫기
-        document.getElementById('button-register-success').style.display = 'none';
+        handleRegistration();
     });
 
     // 등록 모달창에서 취소 버튼 클릭 시 모달창 닫기
@@ -586,10 +379,140 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#button-register-error .confirm').addEventListener('click', function () {
         document.getElementById('button-register-error').style.display = 'none';
     });
-});
+}
 
-  
-  
+function handleRegistration() {
+    // 이미지 유효성 검사
+    var fileInput = document.getElementById('file-input');
+    var selectedImage = document.getElementById('selected-image');
+    var fileValid = fileInput.files.length > 0;
+    var maxFileSizeKB = 1; // 최대 허용 파일 크기 (MB)
+    //  console.log('Image Valid:', fileValid);
+
+    // 이미지 유효성 검사
+        var fileInput = document.getElementById('file-input');
+        var selectedImage = document.getElementById('selected-image');
+        var fileValid = fileInput.files.length > 0;
+        var maxFileSizeKB = 1; // 최대 허용 파일 크기 (MB)
+       //  console.log('Image Valid:', fileValid);
+        
+        // 식별코드 유효성 검사
+        var codeInput = document.querySelector('#code-heading input');
+        var codeValid = codeInput.value.trim() !== '';
+       // console.log('codeValid:', codeValid);
+
+        // 학교명 유효성 검사
+        var schoolInput = document.querySelector('#school-heading input');
+        var schoolValid = schoolInput.value.trim() !== '';
+        // console.log('schoolValid:', schoolValid);
+
+        // 성명 유효성 검사
+        var nameInput = document.querySelector('#name-heading input');
+        var nameValid = nameInput.value.trim() !== '';
+        // console.log('nameValid:', nameValid);
+
+        // 생년월일 유효성 검사
+        var dobInput = document.querySelector('#dob-heading input');
+        var dobValid = dobInput.value.trim() !== '';
+       // console.log('dobValid:', dobValid);
+
+        // 종목 유효성 검사
+        var sportSelect = document.querySelector('#sport-select-container1');
+        var sportValid = sportSelect.value !== '';
+
+        // 근무지 전화번호 유효성 검사
+        var telInput1 = document.querySelector('#tel-heading input[name="tel1"]');
+        var telInput2 = document.querySelector('#tel-heading input[name="tel2"]');
+        var telInput3 = document.querySelector('#tel-heading input[name="tel3"]');
+
+        var telValid =
+            /^\d{3}$/.test(telInput1.value.trim()) &&
+            /^\d{4}$/.test(telInput2.value.trim()) &&
+            /^\d{4}$/.test(telInput3.value.trim());
+            console.log('telValid:', telValid);
+
+        // 최초채용 유효성 검사
+        var hireInput = document.querySelector('#hire-date-heading input');
+        var hireValid = hireInput.value.trim() !== '';
+       // console.log('hireValid:', hireValid);
+
+
+        // 근무 이력 테이블 필수 입력값 체크
+        var workTableInputs = document.querySelectorAll('#Employment-History-Tr input[required], #Employment-History-Tr select[required]');
+        var workTableFilled = Array.from(workTableInputs).every(function (input) {
+            return input.value.trim() !== '';
+        });
+        console.log('workTableFilled:', workTableFilled);
+
+        // 자격사항 테이블 필수 입력값 체크
+        var qualTable = document.getElementById('Certificate-Table');
+        var qualTableInputs = qualTable.querySelectorAll('input[required]');
+        var qualTableFilled = Array.from(qualTableInputs).every(function (input) {
+            return input.value.trim() !== '';
+        });
+        console.log('qualTableFilled:', qualTableFilled);
+
+        var qualificationNumberInput = document.querySelector('#Certificate-Table input[placeholder="영문, 숫자만 입력해주세요."]');
+        var qualificationNumberValid = /^[A-Za-z0-9]+$/.test(qualificationNumberInput.value.trim());
+        console.log('qualificationNumberValid:', qualificationNumberValid);
+
+    // 필수 입력값이 모두 채워져 있을 때 등록 모달창 띄우기
+    if (
+        codeValid &&
+        schoolValid &&
+        nameValid &&
+        dobValid &&
+        telValid &&
+        sportValid &&
+        hireValid &&
+        workTableFilled &&
+        qualTableFilled &&
+        qualificationNumberValid
+    ) {
+        document.getElementById('button-register-success').style.display = 'block';
+
+        sendDataToServer({
+            code: codeInput.value.trim(),
+            school: schoolInput.value.trim(),
+            name: nameInput.value.trim(),
+            dob: dobInput.value.trim(),
+            tel: `${telInput1.value.trim()}-${telInput2.value.trim()}-${telInput3.value.trim()}`,
+            sport: sportSelect.value,
+            hireDate: hireInput.value.trim(),
+            // employmentHistory: employmentHistoryData,
+            // qualification: qualificationData
+        });
+    } else {
+        // 필수 입력값이 비어있어간 조건을 만족하지 못할 때 오류 모달창 띄우기
+        document.getElementById('button-register-error').style.display = 'block';
+    }
+}
+
+function sendDataToServer(data) {
+    fetch('https://', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(result => {
+            if (result.success) {
+                alert('서버에 저장되었습니다.');
+                // 모달창 닫기
+                document.getElementById('button-register-success').style.display = 'none';
+            } else {
+                alert('서버 저장에 실패했습니다.');
+            }
+        })
+        .catch(error => {
+            console.error('서버 통신 오류:', error);
+            alert('서버 통신 중 오류가 발생했습니다.');
+        });
+}
+
+
 // --------------------------------------------------
 
 // 취소하기 버튼 클릭 시 팝업 띄우기

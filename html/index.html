@@ -50,7 +50,7 @@
                             <input type="text" placeholder="이름을 입력해주세요." id="searchInput">
                         </div>
                         <div class="button-box">
-                            <div class="search-button" onclick="searchLeaderCode()">검색하기</div>
+                            <div class="search-button">검색하기</div>
                         </div>
                     </div>
                 </div>
@@ -91,14 +91,23 @@
                             </table>
                         </div>
                         <div class="col">
-                            <div class="pagination-container">
-                                <span id="firstPage" class="pagination-item">&laquo;</span>
-                                <span id="prevPage" class="pagination-item">&lsaquo;</span>
-                                <span id="currentPage" class="pagination-item">1</span>
-                                <span id="secondPage" class="pagination-item">2</span>
-                                <span id="nextPage" class="pagination-item">&rsaquo;</span>
-                                <span id="lastPage" class="pagination-item">&raquo;</span>
-                            </div>
+                            <nav aria-label="Page navigation example">
+                                <ul class="pagination">
+                                  <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous" id="PreviousPageLink">
+                                      <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                  </li>
+                                  <div id="page">
+
+                                  </div>
+                                  <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next" id="NextPageLink">
+                                      <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                  </li>
+                                </ul>
+                            </nav>
                         </div>                        
                     </div>
                 </div>

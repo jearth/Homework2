@@ -168,6 +168,9 @@ function applySearchFilter() {
         );
     });
 
+    // "2" 버튼 숨기기
+    $('.pagination .page-item:contains("2")').toggle(searchData <= pageSize);
+
     updateTable(searchData); // 필터링된 데이터를 표시
 }
 

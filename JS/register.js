@@ -436,7 +436,6 @@ function handleRegistration() {
         var hireValid = hireInput.value.trim() !== '';
        // console.log('hireValid:', hireValid);
 
-
         // 근무 이력 테이블 필수 입력값 체크
         var workTableInputs = document.querySelectorAll('#Employment-History-Tr input[required], #Employment-History-Tr select[required]');
         var workTableFilled = Array.from(workTableInputs).every(function (input) {
